@@ -1,0 +1,7 @@
+.login-container {
+    @apply max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md;
+}
+
+.login-form {
+    @apply space-y-4;
+}
