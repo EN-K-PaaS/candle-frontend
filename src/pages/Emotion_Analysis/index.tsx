@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Pie } from 'react-chartjs-2';
+import 'chart.js/auto'; // chart.js 자동 등록
 
 const EmotionAnalysis = () => {
   const [checklistCompletion, setChecklistCompletion] = useState({
@@ -31,6 +33,29 @@ const EmotionAnalysis = () => {
     return "오늘 하루를 성실하게 보내며 스스로를 돌본 당신, 내일은 조금씩 더 나아가는 모습이 정말 멋져요! 😊";
   };
 
+  // 원형 차트를 위한 데이터
+  const pieData = {
+    labels: ['긍정', '중립', '부정'],
+    datasets: [
+      {
+        data: [lastMonthEmotion.positive, lastMonthEmotion.neutral, lastMonthEmotion.negative],
+        backgroundColor: ['#99CCFF', '#D3B8E3', '#FFB6C1'], // 색상
+        borderColor: ['#FFFFFF'],
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const pieOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false, // 범례 숨김
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 mx-auto" style={{ height: '90vh' }}>
@@ -55,14 +80,24 @@ const EmotionAnalysis = () => {
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
-  {/* Left Section: Last Month's Emotion Analysis */}
-  <div className="flex-1 p-4 border rounded-lg shadow-md" style={{ height: '400px' }}>
-    <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>지난 달의 감정 분석</h2>
-    <div className="flex justify-center">
-      
-    </div>
-  </div>
-  
+          {/* Left Section: Last Month's Emotion Analysis */}
+          <div className="flex-1 p-4 border rounded-lg shadow-md flex flex-col justify-center items-center" style={{ height: '400px' }}>
+            <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>지난 달의 감정 분석</h2>
+            
+            <div className="flex items-center">
+              {/* 퍼센트 텍스트 */}
+              <ul className="mr-8 text-left">
+                <li>긍정: <span className="text-blue-500">{lastMonthEmotion.positive}%</span></li>
+                <li>중립: <span className="text-purple-500">{lastMonthEmotion.neutral}%</span></li>
+                <li>부정: <span className="text-pink-500">{lastMonthEmotion.negative}%</span></li>
+              </ul>
+
+              {/* 원형 차트 */}
+              <div style={{ width: '200px', height: '200px' }}>
+                <Pie data={pieData} options={pieOptions} />
+              </div>
+            </div>
+          </div>
 
           {/* Right Section: Yesterday's Emotion Analysis and Encouragement */}
           <div className="flex-1 p-4 border rounded-lg shadow-md">
