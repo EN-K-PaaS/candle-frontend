@@ -84,8 +84,9 @@ const EmotionAnalysis = () => {
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1 p-4 border rounded-lg shadow-md flex flex-col justify-center items-center" style={{ height: '400px' }}>
-            <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>지난 달의 감정 분석</h2>
+          <div className="flex-1 p-4 border rounded-lg shadow-md style={{ height: '400px' }">
+
+            <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}> 지난달의 감정 분석</h2>
             
             <div className="flex items-center">
               <ul className="mr-8 text-left">
