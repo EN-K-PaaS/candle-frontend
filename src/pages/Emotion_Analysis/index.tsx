@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pie } from 'react-chartjs-2';
-import 'chart.js/auto'; // chart.js 자동 등록
+import 'chart.js/auto'; 
 
 const EmotionAnalysis = () => {
   const [checklistCompletion, setChecklistCompletion] = useState({
@@ -38,8 +38,12 @@ const EmotionAnalysis = () => {
     labels: ['긍정', '중립', '부정'],
     datasets: [
       {
-        data: [lastMonthEmotion.positive, lastMonthEmotion.neutral, lastMonthEmotion.negative],
-        backgroundColor: ['#99CCFF', '#D3B8E3', '#FFB6C1'], // 색상
+        data: [
+          lastMonthEmotion.positive,
+          lastMonthEmotion.neutral,
+          lastMonthEmotion.negative,
+        ],
+        backgroundColor: ['#99CCFF', '#D3B8E3', '#FFB6C1'], 
         borderColor: ['#FFFFFF'],
         borderWidth: 2,
       },
@@ -51,7 +55,7 @@ const EmotionAnalysis = () => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, // 범례 숨김
+        display: false, 
       },
     },
   };
@@ -80,37 +84,79 @@ const EmotionAnalysis = () => {
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
-          {/* Left Section: Last Month's Emotion Analysis */}
           <div className="flex-1 p-4 border rounded-lg shadow-md flex flex-col justify-center items-center" style={{ height: '400px' }}>
             <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>지난 달의 감정 분석</h2>
             
             <div className="flex items-center">
-              {/* 퍼센트 텍스트 */}
               <ul className="mr-8 text-left">
-                <li>긍정: <span className="text-blue-500">{lastMonthEmotion.positive}%</span></li>
-                <li>중립: <span className="text-purple-500">{lastMonthEmotion.neutral}%</span></li>
-                <li>부정: <span className="text-pink-500">{lastMonthEmotion.negative}%</span></li>
+                <li>
+                  <div style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#3B82F6', marginRight: '8px' }}></div>
+                  긍정: <span className="text-blue-500">{lastMonthEmotion.positive}%</span>
+                </li>
+                <li>
+                  <div style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#A855F7', marginRight: '8px' }}></div>
+                  중립: <span className="text-purple-500">{lastMonthEmotion.neutral}%</span>
+                </li>
+                <li>
+                  <div style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#EC4899', marginRight: '8px' }}></div>
+                  부정: <span className="text-pink-500">{lastMonthEmotion.negative}%</span>
+                </li>
               </ul>
 
-              {/* 원형 차트 */}
               <div style={{ width: '200px', height: '200px' }}>
                 <Pie data={pieData} options={pieOptions} />
               </div>
             </div>
           </div>
-
-          {/* Right Section: Yesterday's Emotion Analysis and Encouragement */}
+          
           <div className="flex-1 p-4 border rounded-lg shadow-md">
             <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>어제의 감정 분석</h2>
-            <ul>
-              <li>긍정: <span className="text-blue-500">{yesterdayEmotion.positive}%</span></li>
-              <li>중립: <span className="text-yellow-500">{yesterdayEmotion.neutral}%</span></li>
-              <li>부정: <span className="text-red-500">{yesterdayEmotion.negative}%</span></li>
+            
+            <ul className="flex flex-col gap-2">
+              {/* 긍정 감정 막대 */}
+              <li className="flex items-center">
+                <span className="mr-2 w-20">긍정:</span>
+                <div className="w-full h-6 bg-gray-200 rounded-full relative">
+                  <div
+                    className="h-6 bg-blue-500 rounded-full text-center text-white"
+                    style={{ width: `${yesterdayEmotion.positive}%` }}
+                  >
+                    {yesterdayEmotion.positive}%
+                  </div>
+                </div>
+              </li>
+
+              {/* 중립 감정 막대 */}
+              <li className="flex items-center">
+                <span className="mr-2 w-20">중립:</span>
+                <div className="w-full h-6 bg-gray-200 rounded-full relative">
+                  <div
+                    className="h-6 bg-yellow-500 rounded-full text-center text-white"
+                    style={{ width: `${yesterdayEmotion.neutral}%` }}
+                  >
+                    {yesterdayEmotion.neutral}%
+                  </div>
+                </div>
+              </li>
+
+              {/* 부정 감정 막대 */}
+              <li className="flex items-center">
+                <span className="mr-2 w-20">부정:</span>
+                <div className="w-full h-6 bg-gray-200 rounded-full relative">
+                  <div
+                    className="h-6 bg-red-500 rounded-full text-center text-white"
+                    style={{ width: `${yesterdayEmotion.negative}%` }}
+                  >
+                    {yesterdayEmotion.negative}%
+                  </div>
+                </div>
+              </li>
             </ul>
-            <div className="mt-4">
-              <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>한줄 응원의 멘트</h2>
-              <p className="text-gray-700">오늘도 힘내세요! 당신은 할 수 있습니다!</p>
-            </div>
+          </div>  
+
+          <div className="flex-1 p-4 border rounded-lg shadow-md">
+            <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>한줄 응원의 멘트</h2>
+            <p className="text-gray-700 text-left">{getSupportiveMessage()}</p>
           </div>
         </div>
       </div>
