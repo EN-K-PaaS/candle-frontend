@@ -1,16 +1,31 @@
 import { useState } from "react";
+<<<<<<< HEAD
 import { MyGoalItemType } from "../MyGoalContainer";
 
 interface MyGoalEditorProps {
   goal: MyGoalItemType;
   onClose: () => void;
   editGoal: (goal: MyGoalItemType) => void;
+=======
+
+interface MyGoalEditorProps {
+  no: number;
+  progress: number;
+  deadline: Date;
+  onClose: () => void;
+  editGoal: (no: number, progress: number, deadline: Date) => void;
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
   deleteGoal: (no: number) => void;
 }
 
 const MyGoalEditor = (props: MyGoalEditorProps) => {
+<<<<<<< HEAD
   const [progress, setProgress] = useState<number>(props.goal.progress);
   const [deadline, setDeadline] = useState<Date>(props.goal.deadline);
+=======
+  const [progress, setProgress] = useState<number>(props.progress);
+  const [deadline, setDeadline] = useState<Date>(props.deadline);
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDeadline(new Date(e.target.value));
@@ -26,17 +41,28 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
   };
 
   const handleSubmit = () => {
+<<<<<<< HEAD
     props.goal.progress = progress;
     props.goal.deadline = deadline;
     props.editGoal(props.goal);
+=======
+    props.editGoal(props.no, progress, deadline);
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
     props.onClose();
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div className="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg">
+<<<<<<< HEAD
         <h1 className="mb-4 text-lg font-bold">Edit Goal</h1>
         <div className="w-30 h-0.5 my-4 bg-gray-200" />
+=======
+        <h1 className="mb-4 text-lg font-bold">Create New Goal</h1>
+
+        <div className="w-30 h-0.5 my-4 bg-gray-200" />
+
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
         <div className="mb-4 mt-7">
           <label className="block mb-5 text-2xl font-extrabold text-textBlue">
             진행 정도
@@ -47,10 +73,18 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
             min={0}
             max={100}
             onChange={handleProgress}
+<<<<<<< HEAD
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none "
             placeholder="Enter goal"
           />
         </div>
+=======
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            placeholder="Enter goal"
+          />
+        </div>
+
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
         <div className="mt-6 mb-6">
           <label className="block mb-2 text-2xl font-extrabold text-textBlue">
             목표 날짜
@@ -63,6 +97,10 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
             />
           </div>
         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
         <div className="flex justify-end">
           <button
             onClick={props.onClose}
@@ -70,6 +108,10 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
           >
             취소
           </button>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
           <button
             onClick={handleSubmit}
             className="px-3 py-1 text-white transition-colors rounded-lg bg-buttonBlue w-15 hover:bg-white hover:text-buttonBlue hover:border hover:border-gray-300 "

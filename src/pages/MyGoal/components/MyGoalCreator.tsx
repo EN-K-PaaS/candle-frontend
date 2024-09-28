@@ -33,7 +33,11 @@ const MyGoalCreator = (props: MyGoalCreatorProps) => {
             type="text"
             value={plan}
             onChange={(e) => setPlan(e.target.value)}
+<<<<<<< HEAD
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none "
+=======
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
             placeholder="Enter goal"
           />
         </div>
@@ -54,14 +58,22 @@ const MyGoalCreator = (props: MyGoalCreatorProps) => {
         <div className="flex justify-end">
           <button
             onClick={props.onClose}
+<<<<<<< HEAD
             className="px-3 py-1 mr-5 transition-colors bg-white border border-gray-300 rounded-lg text-buttonBlue boreder w-15 hover:bg-buttonBlue hover:text-white hover:border-transparent"
+=======
+            className="px-3 py-1 mr-5 transition-colors bg-white border border-gray-300 rounded-lg text-buttonBlue boreder w-15 hover:bg-buttonBlue hover:text-white"
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
           >
             취소
           </button>
 
           <button
             onClick={handleSubmit}
+<<<<<<< HEAD
             className="px-3 py-1 text-white transition-colors duration-200 rounded-lg bg-buttonBlue w-[60px] border border-transparent hover:bg-white hover:text-buttonBlue hover:border-gray-300"
+=======
+            className="px-3 py-1 text-white transition-colors rounded-lg bg-buttonBlue w-15 hover:bg-white hover:text-buttonBlue hover:border hover:border-gray-300 "
+>>>>>>> 0f3999b (Feat: MyGoalEditor, MyGoalCreator, MyGoal 파일 생성, tailwind.config.js에 색, 사이즈 추가, pencil-icon 추가)
           >
             등록
           </button>
