@@ -1,19 +1,18 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import DailyChecklist from './pages/DailyChecklist';
-import MyGoal from './pages/MyGoal';
-import Diary from './pages/Diary';
-import EmotionAnalysis from './pages/EmotionAnalysis';
-import Community from './pages/Community';
+import DailyChecklistContainer from './pages/DailyChecklist/DailyChecklistContainer';
+import MyGoal from './pages/MyGoal/MyGoalContainer';
+import Diary from './pages/Diary/Diary';
+import EmotionAnalysis from './pages/EmotionAnalysis/EmotionAnalysis';
+import Community from './pages/Community/Community';
 import NavBar from './components/NavBar';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Router>
       <div>
         <NavBar></NavBar>
         <Routes>
-          <Route path="/dailyChecklist" element={<DailyChecklist />} />
+          <Route path="/dailyChecklist" element={<DailyChecklistContainer />} />
           <Route path="/myGoal" element={<MyGoal />} />
           <Route path="/diary" element={<Diary />} />
           <Route path="/emotionAnalysis" element={<EmotionAnalysis />} />

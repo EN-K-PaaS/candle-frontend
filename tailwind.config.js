@@ -16,6 +16,16 @@ module.exports = {
       boxShadow: {
         text: '0 1px 2px rgba(0, 0, 0, 0.1)',
       },
+      colors: {
+        buttonBlue: '#B2DEED',
+        textBlue: '#98C2CF',
+        pastelPurple: '#E1CCFF',
+        alabaster: '#FAFAFB',
+        darkGray: '#565D6D',
+      },
+      spacing: {
+        22.5: '5.75rem',
+      },
     },
   },
   variants: {},
