@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import React from 'react';
 import { Link } from 'react-router-dom';
+=======
+import { Link } from "react-router-dom";
+>>>>>>> 68dd3ce (Feat: tailwind.config.js에 색, 크기 custom한 것들 추가, DailyChecklist 화면 디자인 & 구성 전부 완료)
 
 const NavBar = () => {
   return (
