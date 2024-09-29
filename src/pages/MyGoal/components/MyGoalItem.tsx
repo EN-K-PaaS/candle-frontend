@@ -3,9 +3,15 @@ import { MyGoalItemType } from "../MyGoalContainer";
 import MyGoalEditor from "./MyGoalEditor";
 
 type MyGoalItemProps = {
+<<<<<<< HEAD
   myGoals: Array<MyGoalItemType>;
   deleteGoal: (no: number) => void;
   editGoal: (goal: MyGoalItemType) => void;
+=======
+  myGoal: Array<MyGoalItemType>;
+  deleteGoal: (no: number) => void;
+  editGoal: (no: number, progress: number, deadline: Date) => void;
+>>>>>>> e3ca5d8 (Refactor: MyGoal.tsx를 MyGoalItem.tsx로 수정함)
 };
 
 const MyGoalItem = (props: MyGoalItemProps) => {
@@ -33,7 +39,11 @@ const MyGoalItem = (props: MyGoalItemProps) => {
 
   return (
     <div>
+<<<<<<< HEAD
       {props.myGoals.map((item) => (
+=======
+      {props.myGoal.map((item) => (
+>>>>>>> e3ca5d8 (Refactor: MyGoal.tsx를 MyGoalItem.tsx로 수정함)
         <div
           key={item.no}
           className="relative flex items-center w-2/3 h-16 p-4 mx-auto bg-white border border-gray-300 rounded-sm"
@@ -77,7 +87,13 @@ const MyGoalItem = (props: MyGoalItemProps) => {
 
       {isOpen && selectedGoal && (
         <MyGoalEditor
+<<<<<<< HEAD
           goal={selectedGoal}
+=======
+          no={selectedGoal.no}
+          progress={selectedGoal.progress}
+          deadline={selectedGoal.deadline}
+>>>>>>> e3ca5d8 (Refactor: MyGoal.tsx를 MyGoalItem.tsx로 수정함)
           onClose={closeMyGoalEditor}
           deleteGoal={props.deleteGoal}
           editGoal={props.editGoal}

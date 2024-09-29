@@ -2,7 +2,6 @@ import { useState } from 'react';
 import MyGoalCreator from './components/MyGoalCreator';
 import SearchBar from './components/SearchBar';
 import MyGoalList from './components/MyGoalList';
-import MyGoal from './components/MyGoal';
 
 export type MyGoalItemType = {
   no: number;
