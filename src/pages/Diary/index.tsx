@@ -5,6 +5,14 @@ const Diary = () => {
     const [diaryEntries, setDiaryEntries] = useState([
         { id: 1, title: '더미 제목 1', content: '더미 본문 1', date: '2024-09-13' },
         { id: 2, title: '더미 제목 2', content: '더미 본문 2', date: '2024-09-14' },
+        { id: 3, title: '더미 제목 3', content: '더미 본문 3', date: '2024-09-13' },
+        { id: 4, title: '더미 제목 4', content: '더미 본문 4', date: '2024-09-14' },
+        { id: 5, title: '더미 제목 5', content: '더미 본문 5', date: '2024-09-13' },
+        { id: 6, title: '더미 제목 6', content: '더미 본문 6', date: '2024-09-14' },
+        { id: 7, title: '더미 제목 7', content: '더미 본문 7', date: '2024-09-13' },
+        { id: 8, title: '더미 제목 8', content: '더미 본문 8', date: '2024-09-14' },
+        { id: 9, title: '더미 제목 9', content: '더미 본문 9', date: '2024-09-13' },
+        { id: 10, title: '더미 제목 10', content: '더미 본문 10', date: '2024-09-14' },
     ]);
     const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
     const [title, setTitle] = useState('');
@@ -27,17 +35,12 @@ const Diary = () => {
         fetchDiaryEntries();
     }, []);
 
-    const handleEntryClick = async (index: number, entryId: number | string) => {
+    const handleEntryClick = (index: number) => {
+        const entry = diaryEntries[index];
         setSelectedEntry(index);
-        try {
-            const response = await axios.get(`/api/post/diary/${entryId}`);
-            const { title, content, date } = response.data;
-            setTitle(title);
-            setContent(content);
-            setCurrentDate(date);
-        } catch (error) {
-            console.error('Error fetching diary entry:', error);
-        }
+        setTitle(entry.title);
+        setContent(entry.content);
+        setCurrentDate(entry.date);
     };
 
     const handleSave = async () => {
@@ -74,7 +77,7 @@ const Diary = () => {
                             {diaryEntries.map((entry, index) => (
                                 <li
                                     key={entry.id}
-                                    onClick={() => handleEntryClick(index, entry.id)}
+                                    onClick={() => handleEntryClick(index)}
                                     className={`p-2 cursor-pointer ${selectedEntry === index ? 'bg-blue-100' : ''}`}
                                     style={{ color: '#2E4EA6' }}
                                 >
@@ -87,18 +90,20 @@ const Diary = () => {
                     {/* Diary Content */}
                     <div className="w-3/4 pl-4">
                         <div className="border p-4 rounded-lg">
-                            <p className="text-gray-500 mb-2 text-left">{currentDate || '날짜를 선택하세요'}</p>
+                            <p className="text-gray-500 mb-2 text-left">
+                                {currentDate || 'List에서 제목을 선택해주세요'}
+                            </p>
                             <input
                                 type="text"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
-                                placeholder="제목을 입력하세요"
+                                placeholder=""
                                 className="w-full p-2 mb-4 border-b focus:outline-none focus:border-blue-500"
                             />
                             <textarea
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}
-                                placeholder="내용을 입력하세요"
+                                placeholder=""
                                 className="w-full h-40 p-2 border rounded-md resize-none focus:outline-none focus:border-blue-500"
                             />
                             <div className="text-right mt-4">
