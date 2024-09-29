@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MyGoalCreator from "./components/MyGoalCreator";
-import MyGoal from "./components/MyGoal";
+import MyGoalItem from "./components/MyGoalItem";
 import SearchBar from "./components/SearchBar";
 
 export type MyGoalItemType = {
@@ -88,7 +88,11 @@ const MyGoalContainer = () => {
             <span className="absolute pt-3 right-48">상태</span>
             <span className="absolute pt-3 right-20">진행상황</span>
           </div>
-          <MyGoal myGoal={myGoal} deleteGoal={deleteGoal} editGoal={editGoal} />
+          <MyGoalItem
+            myGoal={myGoal}
+            deleteGoal={deleteGoal}
+            editGoal={editGoal}
+          />
         </div>
       </div>
 

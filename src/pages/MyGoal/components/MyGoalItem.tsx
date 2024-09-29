@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MyGoalItemType } from "../MyGoalContainer";
-import MyGoalEditor from "../components/MyGoalEditor";
+import MyGoalEditor from "./MyGoalEditor";
 
 type MyGoalItemProps = {
   myGoal: Array<MyGoalItemType>;
@@ -8,7 +8,7 @@ type MyGoalItemProps = {
   editGoal: (no: number, progress: number, deadline: Date) => void;
 };
 
-const MyGoal = (props: MyGoalItemProps) => {
+const MyGoalItem = (props: MyGoalItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState<MyGoalItemType | null>(null);
 
@@ -89,4 +89,4 @@ const MyGoal = (props: MyGoalItemProps) => {
   );
 };
 
-export default MyGoal;
+export default MyGoalItem;
