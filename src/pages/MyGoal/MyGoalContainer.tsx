@@ -1,7 +1,8 @@
-import { useState } from "react";
-import MyGoalCreator from "./components/MyGoalCreator";
-import SearchBar from "./components/SearchBar";
-import MyGoalList from "./components/MyGoalList";
+import { useState } from 'react';
+import MyGoalCreator from './components/MyGoalCreator';
+import SearchBar from './components/SearchBar';
+import MyGoalList from './components/MyGoalList';
+import MyGoal from './components/MyGoal';
 
 export type MyGoalItemType = {
   no: number;
@@ -19,13 +20,13 @@ const MyGoalContainer = () => {
   const closeMyGoalCreator = () => setIsOpen(false);
 
   const [myGoals, setMyGoal] = useState<Array<MyGoalItemType>>([
-    { no: 1, goal: "청소하기", deadline: new Date("2024-10-01"), progress: 20 },
-    { no: 2, goal: "책 읽기", deadline: new Date("2024-10-05"), progress: 50 },
-    { no: 3, goal: "과제하기", deadline: new Date("2024-09-30"), progress: 80 },
+    { no: 1, goal: '청소하기', deadline: new Date('2024-10-01'), progress: 20 },
+    { no: 2, goal: '책 읽기', deadline: new Date('2024-10-05'), progress: 50 },
+    { no: 3, goal: '과제하기', deadline: new Date('2024-09-30'), progress: 80 },
     {
       no: 4,
-      goal: "운동하기",
-      deadline: new Date("2024-10-02"),
+      goal: '운동하기',
+      deadline: new Date('2024-10-02'),
       progress: 100,
     },
   ]);
@@ -62,7 +63,7 @@ const MyGoalContainer = () => {
   };
 
   const handleSearch = (query: string) => {
-    console.log("Searching for:", query);
+    console.log('Searching for:', query);
     const filteredGoals = myGoals.filter((item) =>
       item.goal.toLowerCase().includes(query.toLowerCase())
     );
@@ -79,8 +80,7 @@ const MyGoalContainer = () => {
         <div>
           <button
             onClick={openMyGoalCreator}
-            className="px-3 py-1 mr-4 text-white rounded-lg bg-buttonBlue"
-          >
+            className="px-3 py-1 mr-4 text-white rounded-lg bg-buttonBlue">
             + create New Goal
           </button>
         </div>
