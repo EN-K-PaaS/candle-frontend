@@ -10,6 +10,7 @@ const Diary = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [currentDate, setCurrentDate] = useState('');
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     useEffect(() => {
         // Fetch all diary entries when the component mounts
@@ -37,17 +38,34 @@ const Diary = () => {
 
     const handleSave = async () => {
         try {
-            const response = await axios.post('/api/post/diary', {
-                userId: '회원 아이디',
-                title,
-                content,
-                date: currentDate,
-                // Add photo parameter if needed
-            });
-            console.log('Diary saved with ID:', response.data.diaryId);
+            // 서버와의 통신을 시뮬레이션
+            const newEntry = { id: Date.now(), title, content, date: currentDate };
+            setDiaryEntries([...diaryEntries, newEntry]);
+            setIsPopupOpen(false); // 팝업 닫기
+            console.log('Diary saved locally with ID:', newEntry.id);
+
+            // 실제 서버와의 통신
+            // const response = await axios.post('/api/post/diary', {
+            //     userId: '회원 아이디',
+            //     title,
+            //     content,
+            //     date: currentDate,
+            // });
+            // console.log('Diary saved with ID:', response.data.diaryId);
+            // const newEntry = { id: response.data.diaryId, title, content, date: currentDate };
+            // setDiaryEntries([...diaryEntries, newEntry]);
+            // setIsPopupOpen(false); // 팝업 닫기
         } catch (error) {
             console.error('Error saving diary entry:', error);
         }
+    };
+
+    const handleAddNewEntry = () => {
+        setSelectedEntry(null);
+        setTitle('');
+        setContent('');
+        setCurrentDate(new Date().toISOString().split('T')[0]); // 현재 날짜 설정
+        setIsPopupOpen(true); // 팝업 열기
     };
 
     return (
@@ -78,6 +96,13 @@ const Diary = () => {
                                     </li>
                                 ))}
                             </ul>
+                            {/* 새로운 일기 작성 버튼 추가 */}
+                            <button
+                                onClick={handleAddNewEntry}
+                                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition mt-4 w-full"
+                            >
+                                새로운 일기 작성
+                            </button>
                         </div>
 
                         {/* Diary Content */}
@@ -110,6 +135,42 @@ const Diary = () => {
                     </div>
                 </div>
             </div>
+
+            {/* 팝업창 */}
+            {isPopupOpen && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+                        <h2 className="text-lg font-bold mb-4">새로운 일기 작성</h2>
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="제목을 입력하세요"
+                            className="w-full p-2 mb-4 border-b focus:outline-none focus:border-blue-500"
+                        />
+                        <textarea
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            placeholder="내용을 입력하세요"
+                            className="w-full h-40 p-2 border rounded-md resize-none focus:outline-none focus:border-blue-500"
+                        />
+                        <div className="text-right mt-4">
+                            <button
+                                onClick={() => setIsPopupOpen(false)}
+                                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition mr-2"
+                            >
+                                취소
+                            </button>
+                            <button
+                                onClick={handleSave}
+                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                            >
+                                저장
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
