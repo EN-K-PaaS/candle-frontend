@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DailyChecklistCreator from "./components/DailyChecklistCreator";
-import DailyChecklist from "./components/DailyChecklist";
+import DailyChecklistItem from "./components/DailyChecklistItem";
 
 export type Importance = "보통" | "중요" | "매우 중요";
 
@@ -51,9 +51,13 @@ const DailyChecklistContainer = () => {
     setDailyChecklist(newChecklist);
   };
 
+  const sortedDailyChecklist = [...dailyChecklist].sort((a, b) => {
+    return Number(a.done) - Number(b.done);
+  });
+
   return (
     <div className="min-h-screen p-8 bg-gray-100">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between px-20">
         <div className="text-2xl font-black text-black">데일리 체크리스트</div>
         <div>
           <button
@@ -65,7 +69,7 @@ const DailyChecklistContainer = () => {
         </div>
       </div>
 
-      <div className="w-2/3 p-10 mx-auto bg-white border border-gray-300 rounded-lg translate-y-7">
+      <div className="w-2/3 px-10 pt-8 pb-10 mx-auto mt-8 bg-white border border-gray-300 rounded-lg">
         <div className="flex">
           <h1 className="text-2xl text-blue-400">TODO</h1>
           <div className="flex items-center justify-center p-2 ml-5 translate-y-2 bg-gray-200 rounded-2xl w-18 h-7">
@@ -75,12 +79,12 @@ const DailyChecklistContainer = () => {
           </div>
         </div>
         <div>
-          <div className="font-bold w-2/3 h-12 relative mx-auto mt-5 border border-gray-300 rounded-t-lg text-[13px] bg-alabaster text-darkGray">
+          <div className="font-bold w-2/3 h-12 relative mx-auto mt-8 border border-gray-300 rounded-t-lg text-[13px] bg-alabaster text-darkGray">
             <span className="absolute pt-3 left-14">계획</span>
             <span className="absolute pt-3 right-22.5">우선순위</span>
           </div>
-          <DailyChecklist
-            dailyChecklist={dailyChecklist}
+          <DailyChecklistItem
+            dailyChecklist={sortedDailyChecklist}
             deletePlan={deletePlan}
             toggleDone={toggleDone}
           />

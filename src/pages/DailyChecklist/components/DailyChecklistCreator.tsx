@@ -36,7 +36,7 @@ const DailyChecklistCreator = (props: DailyChecklistCreatorProps) => {
             type="text"
             value={plan}
             onChange={(e) => setPlan(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none "
             placeholder="Enter goal"
           />
         </div>
@@ -72,7 +72,7 @@ const DailyChecklistCreator = (props: DailyChecklistCreatorProps) => {
 
           <button
             onClick={handleSubmit}
-            className="px-3 py-1 text-white transition-colors rounded-lg bg-buttonBlue w-15 hover:bg-white hover:text-buttonBlue hover:border hover:border-gray-300 "
+            className="px-3 py-1 text-white transition-colors duration-200 rounded-lg bg-buttonBlue w-[60px] border border-transparent hover:bg-white hover:text-buttonBlue hover:border-gray-300"
           >
             등록
           </button>

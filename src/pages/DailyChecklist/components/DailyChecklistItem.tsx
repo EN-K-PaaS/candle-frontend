@@ -6,7 +6,7 @@ type DailyChecklistItemProps = {
   deletePlan: (no: number) => void;
 };
 
-const DailyChecklist = (props: DailyChecklistItemProps) => {
+const DailyChecklistItem = (props: DailyChecklistItemProps) => {
   const getImportanceColor = (importance: Importance, isDone: boolean) => {
     if (isDone) {
       return getIsDoneColor(importance);
@@ -71,4 +71,4 @@ const DailyChecklist = (props: DailyChecklistItemProps) => {
   );
 };
 
-export default DailyChecklist;
+export default DailyChecklistItem;
