@@ -1,17 +1,16 @@
 import { useState } from "react";
+import { MyGoalItemType } from "../MyGoalContainer";
 
 interface MyGoalEditorProps {
-  no: number;
-  progress: number;
-  deadline: Date;
+  goal: MyGoalItemType;
   onClose: () => void;
-  editGoal: (no: number, progress: number, deadline: Date) => void;
+  editGoal: (goal: MyGoalItemType) => void;
   deleteGoal: (no: number) => void;
 }
 
 const MyGoalEditor = (props: MyGoalEditorProps) => {
-  const [progress, setProgress] = useState<number>(props.progress);
-  const [deadline, setDeadline] = useState<Date>(props.deadline);
+  const [progress, setProgress] = useState<number>(props.goal.progress);
+  const [deadline, setDeadline] = useState<Date>(props.goal.deadline);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDeadline(new Date(e.target.value));
@@ -27,17 +26,17 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
   };
 
   const handleSubmit = () => {
-    props.editGoal(props.no, progress, deadline);
+    props.goal.progress = progress;
+    props.goal.deadline = deadline;
+    props.editGoal(props.goal);
     props.onClose();
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div className="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg">
-        <h1 className="mb-4 text-lg font-bold">Create New Goal</h1>
-
+        <h1 className="mb-4 text-lg font-bold">Edit Goal</h1>
         <div className="w-30 h-0.5 my-4 bg-gray-200" />
-
         <div className="mb-4 mt-7">
           <label className="block mb-5 text-2xl font-extrabold text-textBlue">
             진행 정도
@@ -48,11 +47,10 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
             min={0}
             max={100}
             onChange={handleProgress}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none "
             placeholder="Enter goal"
           />
         </div>
-
         <div className="mt-6 mb-6">
           <label className="block mb-2 text-2xl font-extrabold text-textBlue">
             목표 날짜
@@ -65,7 +63,6 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
             />
           </div>
         </div>
-
         <div className="flex justify-end">
           <button
             onClick={props.onClose}
@@ -73,7 +70,6 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
           >
             취소
           </button>
-
           <button
             onClick={handleSubmit}
             className="px-3 py-1 text-white transition-colors rounded-lg bg-buttonBlue w-15 hover:bg-white hover:text-buttonBlue hover:border hover:border-gray-300 "

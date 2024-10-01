@@ -3,9 +3,9 @@ import { MyGoalItemType } from "../MyGoalContainer";
 import MyGoalEditor from "./MyGoalEditor";
 
 type MyGoalItemProps = {
-  myGoal: Array<MyGoalItemType>;
+  myGoals: Array<MyGoalItemType>;
   deleteGoal: (no: number) => void;
-  editGoal: (no: number, progress: number, deadline: Date) => void;
+  editGoal: (goal: MyGoalItemType) => void;
 };
 
 const MyGoalItem = (props: MyGoalItemProps) => {
@@ -33,7 +33,7 @@ const MyGoalItem = (props: MyGoalItemProps) => {
 
   return (
     <div>
-      {props.myGoal.map((item) => (
+      {props.myGoals.map((item) => (
         <div
           key={item.no}
           className="relative flex items-center w-2/3 h-16 p-4 mx-auto bg-white border border-gray-300 rounded-sm"
@@ -77,9 +77,7 @@ const MyGoalItem = (props: MyGoalItemProps) => {
 
       {isOpen && selectedGoal && (
         <MyGoalEditor
-          no={selectedGoal.no}
-          progress={selectedGoal.progress}
-          deadline={selectedGoal.deadline}
+          goal={selectedGoal}
           onClose={closeMyGoalEditor}
           deleteGoal={props.deleteGoal}
           editGoal={props.editGoal}

@@ -23,8 +23,8 @@ const SearchBar = (props: SearchBarProps) => {
           type="text"
           value={query}
           onChange={handleQueryChange}
-          placeholder="Search..."
-          className=""
+          placeholder="Search"
+          className="focus:outline-none"
         />
         <img
           src="/icons/search-icon.png"

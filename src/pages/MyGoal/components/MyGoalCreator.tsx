@@ -33,7 +33,7 @@ const MyGoalCreator = (props: MyGoalCreatorProps) => {
             type="text"
             value={plan}
             onChange={(e) => setPlan(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none "
             placeholder="Enter goal"
           />
         </div>
@@ -54,14 +54,14 @@ const MyGoalCreator = (props: MyGoalCreatorProps) => {
         <div className="flex justify-end">
           <button
             onClick={props.onClose}
-            className="px-3 py-1 mr-5 transition-colors bg-white border border-gray-300 rounded-lg text-buttonBlue boreder w-15 hover:bg-buttonBlue hover:text-white"
+            className="px-3 py-1 mr-5 transition-colors bg-white border border-gray-300 rounded-lg text-buttonBlue boreder w-15 hover:bg-buttonBlue hover:text-white hover:border-transparent"
           >
             취소
           </button>
 
           <button
             onClick={handleSubmit}
-            className="px-3 py-1 text-white transition-colors rounded-lg bg-buttonBlue w-15 hover:bg-white hover:text-buttonBlue hover:border hover:border-gray-300 "
+            className="px-3 py-1 text-white transition-colors duration-200 rounded-lg bg-buttonBlue w-[60px] border border-transparent hover:bg-white hover:text-buttonBlue hover:border-gray-300"
           >
             등록
           </button>
