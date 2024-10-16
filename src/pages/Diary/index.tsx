@@ -4,11 +4,13 @@ import axios from 'axios';
 const Diary = () => {
     const [diaryEntries, setDiaryEntries] = useState<Array<{
         id: number;
+        title: string;
         content: string;
         image: string;
         createdAt: string;
     }>>([]);
     const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
+    const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [currentDate, setCurrentDate] = useState('');
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -31,17 +33,18 @@ const Diary = () => {
     const handleEntryClick = (index: number) => {
         const entry = diaryEntries[index];
         setSelectedEntry(index);
+        setTitle(entry.title);
         setContent(entry.content);
         setCurrentDate(new Date(entry.createdAt).toLocaleDateString());
     };
 
     const handleSave = async () => {
         try {
-            // 서버와의 통신을 시뮬레이션 (실제 API 구현 시 수정 필요)
             const newEntry = {
                 id: Date.now(),
+                title,
                 content,
-                image: "", // 이미지 처리 로직 추가 필요
+                image: "",
                 createdAt: new Date().toISOString()
             };
             setDiaryEntries([...diaryEntries, newEntry]);
@@ -49,12 +52,7 @@ const Diary = () => {
             console.log('다이어리가 로컬에 저장되었습니다. ID:', newEntry.id);
 
             // 실제 서버와의 통신 (API 구현 시 주석 해제)
-            // const response = await axios.post('/api/v1/diaries', {
-            //     userId: '회원 아이디',
-            //     content,
-            //     image: "", // 이미지 처리 로직 추가 필요
-            // });
-            // console.log('다이어리가 저장되었습니다. ID:', response.data.id);
+            // const response = await axios.post('/api/v1/diaries', newEntry);
             // setDiaryEntries([...diaryEntries, response.data]);
             // setIsPopupOpen(false);
         } catch (error) {
@@ -64,12 +62,12 @@ const Diary = () => {
 
     const handleAddNewEntry = () => {
         setSelectedEntry(null);
+        setTitle('');
         setContent('');
-        setCurrentDate(new Date().toISOString().split('T')[0]); // 현재 날짜 설정
-        setIsPopupOpen(true); // 팝업 열기
+        setCurrentDate(new Date().toISOString().split('T')[0]);
+        setIsPopupOpen(true);
     };
 
-    // 삭제 함수 추가
     const handleDelete = async () => {
         if (selectedEntry === null) {
             alert('삭제할 일기를 선택해주세요.');
@@ -82,10 +80,10 @@ const Diary = () => {
             try {
                 await axios.delete(`/api/v1/diaries/${entryToDelete.id}`);
                 
-                // 로컬 상태 업데이트
                 const newEntries = diaryEntries.filter(entry => entry.id !== entryToDelete.id);
                 setDiaryEntries(newEntries);
                 setSelectedEntry(null);
+                setTitle('');
                 setContent('');
                 setCurrentDate('');
                 
@@ -107,7 +105,6 @@ const Diary = () => {
 
                 <div className="p-4 border rounded-lg">
                     <div className="flex">
-                        {/* Diary List */}
                         <div className="w-1/4 pr-4 border-r">
                             <h2 className="mb-4 text-lg font-bold" style={{ color: '#B2B2B2' }}>
                                 List
@@ -121,11 +118,10 @@ const Diary = () => {
                                         className={`p-2 cursor-pointer ${selectedEntry === index ? 'bg-blue-100' : ''}`}
                                         style={{ color: '#2E4EA6' }}
                                     >
-                                        {new Date(entry.createdAt).toLocaleDateString()}
+                                        {entry.title}
                                     </li>
                                 ))}
                             </ul>
-                            {/* 새로운 일기 작성 버튼 추가 */}
                             <button
                                 onClick={handleAddNewEntry}
                                 className="w-full px-4 py-2 mt-4 text-white transition bg-green-500 rounded-md hover:bg-green-600"
@@ -134,10 +130,16 @@ const Diary = () => {
                             </button>
                         </div>
 
-                        {/* Diary Content */}
                         <div className="w-3/4 pl-4">
                             <div className="p-4 border rounded-lg">
                                 <p className="mb-2 text-left text-gray-500">{currentDate || '날짜를 선택하세요'}</p>
+                                <input
+                                    type="text"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    placeholder="제목을 입력하세요"
+                                    className="w-full p-2 mb-2 border rounded-md focus:outline-none focus:border-blue-500"
+                                />
                                 <textarea
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
@@ -147,9 +149,10 @@ const Diary = () => {
                                 <div className="mt-4 text-right">
                                     <button
                                         onClick={handleSave}
-                                        className="px-4 py-2 text-white transition bg-blue-500 rounded-md hover:bg-blue-600"
+                                        className="px-4 py-2 mr-2 text-white transition bg-blue-500 rounded-md hover:bg-blue-600"
                                     >
-                                        저장
+                                        수정
+        
                                     </button>
                                     <button
                                         onClick={handleDelete}
@@ -164,11 +167,17 @@ const Diary = () => {
                 </div>
             </div>
 
-            {/* 팝업창 */}
             {isPopupOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50">
                     <div className="w-1/3 p-6 bg-white rounded-lg shadow-lg">
                         <h2 className="mb-4 text-lg font-bold">새로운 일기 작성</h2>
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="제목을 입력하세요"
+                            className="w-full p-2 mb-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        />
                         <textarea
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
