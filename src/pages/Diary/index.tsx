@@ -96,8 +96,8 @@ const Diary = () => {
     };
 
     return (
-        <div className="min-h-screen p-8 bg-gray-100">
-            <div className="w-3/4 p-6 mx-auto bg-white rounded-lg shadow-lg">
+        <div className="min-h-screen p-12 bg-gray-100">
+            <div className="w-5/6 h-[90vh] p-8 mx-auto bg-white rounded-lg shadow-lg">
                 <div className="flex flex-col items-center mb-6">
                     <h1 className="mb-2 text-2xl font-extrabold text-center">일기</h1>
                     <h2 className="w-full mb-6 font-poppins font-normal text-[24px] leading-[36px] text-left" style={{ color: '#379AE6' }}>
@@ -105,14 +105,14 @@ const Diary = () => {
                     </h2>
                 </div>
 
-                <div className="p-4 border rounded-lg">
-                    <div className="flex">
-                        <div className="w-1/4 pr-4 border-r">
+                <div className="p-4 border rounded-lg h-[80%]">
+                    <div className="flex h-full">
+                        <div className="w-1/4 h-full pr-4 border-r">
                             <h2 className="mb-4 text-lg font-bold text-left" style={{ color: '#B2B2B2' }}>
                                 List
                             </h2>
 
-                            <ul className="h-64 overflow-y-scroll">
+                            <ul className="h-[calc(100%-6rem)] overflow-y-auto">
                                 {diaryEntries.map((entry, index) => (
                                     <li
                                         key={entry.id}
@@ -135,8 +135,8 @@ const Diary = () => {
                             </button>
                         </div>
 
-                        <div className="w-3/4 pl-4">
-                            <div className="p-4 border rounded-lg">
+                        <div className="w-3/4 h-full pl-4">
+                            <div className="flex flex-col h-full p-4 border rounded-lg">
                                 <p className="mb-2 text-left text-gray-500 font-poppins font-semibold text-[14px]">
                                     {currentDate || '날짜를 선택하세요'}
                                 </p>
@@ -151,7 +151,7 @@ const Diary = () => {
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
                                     placeholder=""
-                                    className="w-full h-40 p-2 border rounded-md resize-none focus:outline-none focus:border-blue-500"
+                                    className="flex-grow w-full p-2 border rounded-md resize-none focus:outline-none focus:border-blue-500"
                                 />
                                 <div className="mt-4 text-right">
                                     <button
