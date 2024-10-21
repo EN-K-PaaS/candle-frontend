@@ -100,13 +100,15 @@ const Diary = () => {
             <div className="w-3/4 p-6 mx-auto bg-white rounded-lg shadow-lg">
                 <div className="flex flex-col items-center mb-6">
                     <h1 className="mb-2 text-2xl font-extrabold text-center">일기</h1>
-                    <h2 className="w-full mb-6 text-lg font-bold text-left text-blue-500">Diary</h2>
+                    <h2 className="w-full mb-6 font-poppins font-normal text-[24px] leading-[36px] text-left" style={{ color: '#379AE6' }}>
+                        Diary
+                    </h2>
                 </div>
 
                 <div className="p-4 border rounded-lg">
                     <div className="flex">
                         <div className="w-1/4 pr-4 border-r">
-                            <h2 className="mb-4 text-lg font-bold" style={{ color: '#B2B2B2' }}>
+                            <h2 className="mb-4 text-lg font-bold text-left" style={{ color: '#B2B2B2' }}>
                                 List
                             </h2>
 
@@ -115,8 +117,10 @@ const Diary = () => {
                                     <li
                                         key={entry.id}
                                         onClick={() => handleEntryClick(index)}
-                                        className={`p-2 cursor-pointer ${selectedEntry === index ? 'bg-blue-100' : ''}`}
-                                        style={{ color: '#2E4EA6' }}
+                                        className={`p-2 cursor-pointer font-poppins font-semibold text-[17px] ${
+                                            selectedEntry === index ? 'bg-blue-100' : ''
+                                        }`}
+                                        style={{ color: '#2E4EA6', textAlign: 'left' }}
                                     >
                                         {entry.title}
                                     </li>
@@ -124,7 +128,8 @@ const Diary = () => {
                             </ul>
                             <button
                                 onClick={handleAddNewEntry}
-                                className="w-full px-4 py-2 mt-4 text-white transition bg-green-500 rounded-md hover:bg-green-600"
+                                className="w-full px-4 py-2 mt-4 text-white transition rounded-md hover:bg-blue-300"
+                                style={{ backgroundColor: '#ADD8E6' }}
                             >
                                 새로운 일기 작성
                             </button>
@@ -132,18 +137,20 @@ const Diary = () => {
 
                         <div className="w-3/4 pl-4">
                             <div className="p-4 border rounded-lg">
-                                <p className="mb-2 text-left text-gray-500">{currentDate || '날짜를 선택하세요'}</p>
+                                <p className="mb-2 text-left text-gray-500 font-poppins font-semibold text-[14px]">
+                                    {currentDate || '날짜를 선택하세요'}
+                                </p>
                                 <input
                                     type="text"
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
-                                    placeholder="제목을 입력하세요"
+                                    placeholder=""
                                     className="w-full p-2 mb-2 border rounded-md focus:outline-none focus:border-blue-500"
                                 />
                                 <textarea
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
-                                    placeholder="내용을 입력하세요"
+                                    placeholder=""
                                     className="w-full h-40 p-2 border rounded-md resize-none focus:outline-none focus:border-blue-500"
                                 />
                                 <div className="mt-4 text-right">

@@ -61,18 +61,18 @@ const EmotionAnalysis = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 mx-auto" style={{ height: '90vh' }}>
-        <h1 className="text-2xl font-extrabold mb-2">나의 감정변화 분석</h1>
-        <h2 className="text-lg font-bold text-blue-500 mb-6 text-left">ANALYSIS</h2>
+    <div className="min-h-screen p-8 bg-gray-100">
+      <div className="w-3/4 p-6 mx-auto bg-white rounded-lg shadow-lg" style={{ height: '90vh' }}>
+        <h1 className="mb-2 text-2xl font-extrabold">나의 감정변화 분석</h1>
+        <h2 className="mb-6 text-lg font-bold text-left text-blue-500">ANALYSIS</h2>
 
-        <div className="border border-gray-300 bg-white p-6 rounded-lg shadow-md mb-8">
-          <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>체크리스트 달성률</h2>
+        <div className="p-6 mb-8 bg-white border border-gray-300 rounded-lg shadow-md">
+          <h2 className="mb-4 text-lg font-bold text-left" style={{ color: '#98C2CF' }}>체크리스트 달성률</h2>
           <div className="grid grid-cols-7 gap-2 text-center">
             {Object.entries(checklistCompletion).map(([day, completion]) => (
               <div
                 key={day}
-                className="border border-gray-300 bg-white rounded-xl p-4"
+                className="p-4 bg-white border border-gray-300 rounded-xl"
               >
                 <p className="font-bold">{day}</p>
                 <p className={`${getColorForCompletion(completion)} text-xl font-bold`}>
@@ -83,10 +83,10 @@ const EmotionAnalysis = () => {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           <div className="flex-1 p-4 border rounded-lg shadow-md style={{ height: '400px' }">
 
-            <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}> 지난달의 감정 분석</h2>
+            <h2 className="mb-4 text-lg font-bold text-left" style={{ color: '#98C2CF' }}> 지난달의 감정 분석</h2>
             
             <div className="flex items-center">
               <ul className="mr-8 text-left">
@@ -111,15 +111,15 @@ const EmotionAnalysis = () => {
           </div>
           
           <div className="flex-1 p-4 border rounded-lg shadow-md">
-            <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>어제의 감정 분석</h2>
+            <h2 className="mb-4 text-lg font-bold text-left" style={{ color: '#98C2CF' }}>어제의 감정 분석</h2>
             
             <ul className="flex flex-col gap-2">
               {/* 긍정 감정 막대 */}
               <li className="flex items-center">
-                <span className="mr-2 w-20">긍정:</span>
-                <div className="w-full h-6 bg-gray-200 rounded-full relative">
+                <span className="w-20 mr-2">긍정:</span>
+                <div className="relative w-full h-6 bg-gray-200 rounded-full">
                   <div
-                    className="h-6 bg-blue-500 rounded-full text-center text-white"
+                    className="h-6 text-center text-white bg-blue-500 rounded-full"
                     style={{ width: `${yesterdayEmotion.positive}%` }}
                   >
                     {yesterdayEmotion.positive}%
@@ -129,10 +129,10 @@ const EmotionAnalysis = () => {
 
               {/* 중립 감정 막대 */}
               <li className="flex items-center">
-                <span className="mr-2 w-20">중립:</span>
-                <div className="w-full h-6 bg-gray-200 rounded-full relative">
+                <span className="w-20 mr-2">중립:</span>
+                <div className="relative w-full h-6 bg-gray-200 rounded-full">
                   <div
-                    className="h-6 bg-yellow-500 rounded-full text-center text-white"
+                    className="h-6 text-center text-white bg-yellow-500 rounded-full"
                     style={{ width: `${yesterdayEmotion.neutral}%` }}
                   >
                     {yesterdayEmotion.neutral}%
@@ -142,10 +142,10 @@ const EmotionAnalysis = () => {
 
               {/* 부정 감정 막대 */}
               <li className="flex items-center">
-                <span className="mr-2 w-20">부정:</span>
-                <div className="w-full h-6 bg-gray-200 rounded-full relative">
+                <span className="w-20 mr-2">부정:</span>
+                <div className="relative w-full h-6 bg-gray-200 rounded-full">
                   <div
-                    className="h-6 bg-red-500 rounded-full text-center text-white"
+                    className="h-6 text-center text-white bg-red-500 rounded-full"
                     style={{ width: `${yesterdayEmotion.negative}%` }}
                   >
                     {yesterdayEmotion.negative}%
@@ -156,8 +156,8 @@ const EmotionAnalysis = () => {
           </div>  
 
           <div className="flex-1 p-4 border rounded-lg shadow-md">
-            <h2 className="text-lg font-bold mb-4 text-left" style={{ color: '#98C2CF' }}>한줄 응원의 멘트</h2>
-            <p className="text-gray-700 text-left">{getSupportiveMessage()}</p>
+            <h2 className="mb-4 text-lg font-bold text-left" style={{ color: '#98C2CF' }}>한줄 응원의 멘트</h2>
+            <p className="text-left text-gray-700">{getSupportiveMessage()}</p>
           </div>
         </div>
       </div>
