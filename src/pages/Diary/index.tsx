@@ -143,15 +143,13 @@ const Diary = () => {
                                 <input
                                     type="text"
                                     value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                    placeholder=""
-                                    className="w-full p-2 mb-2 border rounded-md focus:outline-none focus:border-blue-500"
+                                    readOnly // 제목을 읽기 전용으로 설정
+                                    className="w-full p-2 mb-2 border rounded-md focus:outline-none font-poppins font-bold text-[25px] text-[#00227E]"
                                 />
                                 <textarea
                                     value={content}
-                                    onChange={(e) => setContent(e.target.value)}
-                                    placeholder=""
-                                    className="flex-grow w-full p-2 border rounded-md resize-none focus:outline-none focus:border-blue-500"
+                                    readOnly // 내용을 읽기 전용으로 설정
+                                    className="w-full flex-grow p-2 border rounded-md resize-none focus:outline-none font-poppins font-medium text-[17px] text-[#62697D]"
                                 />
                                 <div className="mt-4 text-right">
                                     <button
