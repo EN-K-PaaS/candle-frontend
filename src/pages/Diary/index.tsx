@@ -118,7 +118,7 @@ const Diary = () => {
                                         key={entry.id}
                                         onClick={() => handleEntryClick(index)}
                                         className={`p-2 cursor-pointer font-poppins font-semibold text-[17px] ${
-                                            selectedEntry === index ? 'bg-blue-100' : ''
+                                            selectedEntry === index ? 'bg-[#D3D3D3] shadow-text' : ''
                                         }`}
                                         style={{ color: '#2E4EA6', textAlign: 'left' }}
                                     >
