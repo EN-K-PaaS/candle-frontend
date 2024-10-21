@@ -40,21 +40,38 @@ const Diary = () => {
 
     const handleSave = async () => {
         try {
-            const newEntry = {
-                id: Date.now(),
-                title,
-                content,
-                image: "",
-                createdAt: new Date().toISOString()
-            };
-            setDiaryEntries([...diaryEntries, newEntry]);
-            setIsPopupOpen(false);
-            console.log('다이어리가 로컬에 저장되었습니다. ID:', newEntry.id);
+            if (selectedEntry !== null) {
+                // 선택된 일기를 업데이트
+                const updatedEntry = {
+                    ...diaryEntries[selectedEntry],
+                    title,
+                    content,
+                    createdAt: new Date(currentDate).toISOString() // 날짜를 ISO 형식으로 변환
+                };
 
-            // 실제 서버와의 통신 (API 구현 시 주석 해제)
-            // const response = await axios.post('/api/v1/diaries', newEntry);
-            // setDiaryEntries([...diaryEntries, response.data]);
-            // setIsPopupOpen(false);
+                const newEntries = [...diaryEntries];
+                newEntries[selectedEntry] = updatedEntry; // 기존 일기를 업데이트
+                setDiaryEntries(newEntries);
+                setIsPopupOpen(false);
+                console.log('일기가 수정되었습니다. ID:', updatedEntry.id);
+
+                // 실제 서버와의 통신 (API 구현 시 주석 해제)
+                // const response = await axios.put(`/api/v1/diaries/${updatedEntry.id}`, updatedEntry);
+                // setDiaryEntries(newEntries);
+                // setIsPopupOpen(false);
+            } else {
+                // 새로운 일기 추가 로직 (기존 코드 유지)
+                const newEntry = {
+                    id: Date.now(),
+                    title,
+                    content,
+                    image: "",
+                    createdAt: new Date().toISOString()
+                };
+                setDiaryEntries([...diaryEntries, newEntry]);
+                setIsPopupOpen(false);
+                console.log('다이어리가 로컬에 저장되었습니다. ID:', newEntry.id);
+            }
         } catch (error) {
             console.error('다이어리 항목 저장 오류:', error);
         }
@@ -93,6 +110,20 @@ const Diary = () => {
                 alert('일기 삭제 중 오류가 발생했습니다.');
             }
         }
+    };
+
+    // 새로운 수정 함수
+    const handleEditEntry = () => {
+        if (selectedEntry === null) {
+            alert('수정할 일기를 선택해주세요.');
+            return;
+        }
+
+        // 선택된 일기의 정보를 팝업에 설정
+        setTitle(diaryEntries[selectedEntry].title);
+        setContent(diaryEntries[selectedEntry].content);
+        setCurrentDate(new Date(diaryEntries[selectedEntry].createdAt).toLocaleDateString());
+        setIsPopupOpen(true); // 팝업 열기
     };
 
     return (
@@ -153,7 +184,7 @@ const Diary = () => {
                                 />
                                 <div className="mt-4 text-right">
                                     <button
-                                        onClick={handleSave}
+                                        onClick={handleEditEntry}
                                         className="px-4 py-2 mr-2 text-white transition bg-blue-500 rounded-md hover:bg-blue-600"
                                     >
                                         수정
