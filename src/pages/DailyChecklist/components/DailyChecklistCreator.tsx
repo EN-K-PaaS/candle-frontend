@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Importance } from "../DailyChecklistContainer";
+import { Importance } from "../../../types/dailyChecklistTypes";
 
 interface DailyChecklistCreatorProps {
   onClose: () => void;
@@ -8,16 +8,16 @@ interface DailyChecklistCreatorProps {
 
 const DailyChecklistCreator = (props: DailyChecklistCreatorProps) => {
   const [plan, setPlan] = useState<string>("");
-  const [selectedImportance, setImportance] = useState<Importance>("보통");
+  const [selectedImportance, setImportance] = useState<number>(0);
 
   const importances = ["보통", "중요", "매우 중요"];
 
-  const selectImportance = (importance: Importance) => {
-    setImportance(importance);
+  const selectImportance = (index: number) => {
+    setImportance(index);
   };
 
   const handleSubmit = () => {
-    props.addPlan(plan, selectedImportance);
+    props.addPlan(plan, selectedImportance as Importance);
     props.onClose();
   };
 
@@ -46,12 +46,12 @@ const DailyChecklistCreator = (props: DailyChecklistCreatorProps) => {
             중요도
           </label>
           <div className="flex justify-center mt-5">
-            {importances.map((imp) => (
+            {importances.map((imp, index) => (
               <button
                 key={imp}
-                onClick={() => selectImportance(imp as Importance)}
+                onClick={() => selectImportance(index)}
                 className={`px-3 mx-5 border border-gray-300 rounded-lg text-gray-400 ${
-                  selectedImportance === imp
+                  selectedImportance === index
                     ? "bg-pastelPurple text-white"
                     : "bg-white"
                 }`}
