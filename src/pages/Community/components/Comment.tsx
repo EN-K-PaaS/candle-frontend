@@ -1,5 +1,5 @@
-import HeartButton from "../../../components/HeartButton";
-import { CommentItemType } from "../../../types/commentItemTypes";
+import HeartButton from '../../../components/HeartButton';
+import { CommentItemType } from '../../../types/commentItemTypes';
 
 const Comment = (props: CommentItemType) => {
   return (
@@ -14,10 +14,10 @@ const Comment = (props: CommentItemType) => {
       <div className="flex items-start">
         <div>
           <div className="text-sm font-bold">{props.nickname}</div>
-          <p className="inline text-sm text-gray-600">{props.content}</p>{" "}
+          <p className="inline text-sm text-gray-600">{props.content}</p>{' '}
         </div>
         <div className="ml-2 translate-y-[22px]">
-          {" "}
+          {' '}
           <HeartButton size={20} />
         </div>
       </div>

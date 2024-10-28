@@ -1,7 +1,7 @@
-import CommentInput from "../../../components/CommentInput";
-import { useState } from "react";
-import { CommentItemType } from "../../../types/commentItemTypes";
-import { PostItemType } from "../../../types/postItemTypes";
+import CommentInput from '../../../components/CommentInput';
+import { useState } from 'react';
+import { CommentItemType } from '../../../types/commentItemTypes';
+import { PostItemType } from '../../../types/postItemTypes';
 
 interface PostProps {
   post: PostItemType;
@@ -9,33 +9,33 @@ interface PostProps {
 }
 
 const Post = (props: PostProps) => {
-  const [inputComment, setInputComment] = useState<string>("");
+  const [inputComment, setInputComment] = useState<string>('');
 
   const [commentList, setCommentList] = useState<Array<CommentItemType>>([
     {
       no: 1,
-      nickname: "NickName3",
+      nickname: 'NickName3',
       content:
-        "오늘 하루도 고생 많으셨어요! 가을 바람 느끼면서 산책하는 시간, 참 좋을 것 같아요.",
+        '오늘 하루도 고생 많으셨어요! 가을 바람 느끼면서 산책하는 시간, 참 좋을 것 같아요.',
       profileImageURL:
-        "https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D​",
+        'https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D​',
     },
   ]);
 
   const addComment = () => {
-    if (inputComment.trim() === "") return;
+    if (inputComment.trim() === '') return;
 
     const newCommentList = [
       ...commentList,
       {
         no: commentList.length + 1,
-        nickname: "nickname",
+        nickname: 'nickname',
         content: inputComment,
-        profileImageURL: "",
+        profileImageURL: '',
       },
     ];
     setCommentList(newCommentList);
-    setInputComment("");
+    setInputComment('');
   };
 
   if (props.post === null) return <div>게시물이 없습니다</div>;
@@ -58,8 +58,7 @@ const Post = (props: PostProps) => {
       <div className="flex items-center justify-between mt-4 mb-4">
         <button
           onClick={props.onShowCommentPage}
-          className="text-sm text-gray-300"
-        >
+          className="text-sm text-gray-300">
           댓글 더보기
         </button>
       </div>
