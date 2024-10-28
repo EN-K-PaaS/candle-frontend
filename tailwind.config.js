@@ -1,22 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-<<<<<<< HEAD
-    content: ['./src/**/*.{js,ts,jsx,tsx}'],
-    theme: {
-        extend: {
-            width: {
-                156: '39rem',
-                192: '48rem',
-            },
-        },
-    },
-    variants: {},
-    plugins: [],
-=======
-  content: ["./src/**/*.{ts,tsx}"],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        156: '39rem',
+        192: '48rem',
+      },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
+      backgroundColor: {
+        'selected-gray': '#D3D3D3',
+      },
+      boxShadow: {
+        text: '0 1px 2px rgba(0, 0, 0, 0.1)',
+      },
+    },
   },
+  variants: {},
   plugins: [],
->>>>>>> 3e7da3c (Feat: NavBar 구성 완료)
 };
