@@ -41,7 +41,18 @@ module.exports = {
 =======
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        buttonBlue: "#B2DEED",
+        textBlue: "#98C2CF",
+        pastelPurple: "#E1CCFF",
+        alabaster: "#FAFAFB",
+        darkGray: "#565D6D",
+      },
+      spacing: {
+        22.5: "5.75rem",
+      },
+    },
   },
 >>>>>>> 3e7da3c (Feat: NavBar 구성 완료)
   plugins: [],

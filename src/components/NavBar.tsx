@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React from 'react';
 import { Link } from 'react-router-dom';
 =======
@@ -18,19 +19,26 @@ const NavBar = () => {
           <ul className="flex flex-col list-none translate-y-1 md:flex-row">
 =======
 import React from "react";
+=======
+>>>>>>> 68dd3ce (Feat: tailwind.config.js에 색, 크기 custom한 것들 추가, DailyChecklist 화면 디자인 & 구성 전부 완료)
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <nav className="bg-white p-4">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between">
+    <nav className="p-4 bg-white border-b border-gray-300">
+      <div className="container flex flex-col justify-between mx-auto md:flex-row">
         <div className="flex items-center space-x-5">
-          <img src="/images/candle_image.png" className="w-8 h-9" />
-          <div className="text-black text-lg font-bold text-2xl">Candle</div>
+          <img src="/icons/candle-icon.png" className="w-8 h-9" />
+          <div className="text-lg text-2xl font-bold text-black">Candle</div>
         </div>
+<<<<<<< HEAD
         <div className="space-x-0 md:space-x-4 mt-4 md:mt-0 font-medium text-sm">
           <ul className="flex flex-col md:flex-row list-none translate-y-1">
 >>>>>>> 3e7da3c (Feat: NavBar 구성 완료)
+=======
+        <div className="mt-4 space-x-0 text-sm font-medium md:space-x-4 md:mt-0">
+          <ul className="flex flex-col list-none translate-y-1 md:flex-row">
+>>>>>>> 68dd3ce (Feat: tailwind.config.js에 색, 크기 custom한 것들 추가, DailyChecklist 화면 디자인 & 구성 전부 완료)
             <li className="px-3 py-1">
               <Link to="/dailyChecklist" className="flex hover:text-blue-300">
                 <img
