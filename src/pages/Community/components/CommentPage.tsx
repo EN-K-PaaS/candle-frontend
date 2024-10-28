@@ -1,6 +1,6 @@
 import Comment from "./Comment";
-import { PostItemType } from "./Post";
-import { CommentItemType } from "../components/Comment";
+import { PostItemType } from "../../../types/postItemTypes";
+import { CommentItemType } from "../../../types/commentItemTypes";
 import { useState } from "react";
 import CommentInput from "../../../components/CommentInput";
 

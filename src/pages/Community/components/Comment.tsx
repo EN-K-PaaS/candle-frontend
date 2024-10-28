@@ -1,11 +1,5 @@
 import HeartButton from "../../../components/HeartButton";
-
-export type CommentItemType = {
-  no: number;
-  nickname: string;
-  content: string;
-  profileImageURL: string;
-};
+import { CommentItemType } from "../../../types/commentItemTypes";
 
 const Comment = (props: CommentItemType) => {
   return (

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Post from "./components/Post";
 import CommentPage from "./components/CommentPage";
-import { PostItemType } from "./components/Post";
+import { PostItemType } from "../../types/postItemTypes";
+import { checkForSlang } from "../../util/api";
 
 const Community = () => {
   const [showCommentPage, setShowCommentPage] = useState(false);
@@ -50,46 +51,39 @@ const Community = () => {
       profileImageURL:
         "https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D​",
     },
-    {
-      no: 4,
-      nickname: "Foodie",
-      content: "최고의 맛집을 찾았어요! 여기 꼭 가보세요.",
-      createdAt: new Date("2024-09-26T18:00:00"),
-      likes: 35,
-      imageURL: "https://example.com/image4.jpg",
-      profileImageURL:
-        "https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D​",
-    },
-    {
-      no: 5,
-      nickname: "FitnessFan",
-      content: "오늘 운동하고 기분이 상쾌해요! 💪",
-      createdAt: new Date("2024-09-25T07:30:00"),
-      likes: 18,
-      imageURL: "https://example.com/image5.jpg",
-      profileImageURL:
-        "https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D​",
-    },
   ]);
 
-  const addPost = () => {
+  const addPost = async () => {
     if (inputContent.trim() === "") return;
 
-    const newPostList = [
-      ...postList,
-      {
-        no: postList.length + 1,
-        nickname: "nickname",
-        content: inputContent,
-        createdAt: new Date(),
-        likes: 0,
-        imageURL: null,
-        profileImageURL:
-          "https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D​",
-      },
-    ];
-    setPostList(newPostList);
-    setInputContent("");
+    try {
+      const hasSlang = await checkForSlang(inputContent); // 비속어 검사
+
+      if (hasSlang) {
+        alert("비속어가 포함되어 있어 게시물을 등록할 수 없습니다.");
+        return;
+      }
+
+      // 비속어가 없으면 게시물 추가
+      const newPostList = [
+        ...postList,
+        {
+          no: postList.length + 1,
+          nickname: "nickname",
+          content: inputContent,
+          createdAt: new Date(),
+          likes: 0,
+          imageURL: null,
+          profileImageURL:
+            "https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D​",
+        },
+      ];
+      setPostList(newPostList);
+      setInputContent("");
+    } catch (error) {
+      console.error("비속어 검사를 실패했습니다:", error);
+      alert("비속어 검사를 할 수 없습니다. 다시 시도해 주세요.");
+    }
   };
 
   return (
@@ -129,8 +123,7 @@ const Community = () => {
               post != null ? (
                 <div key={post.no}>
                   <Post
-                    no={post.no}
-                    postItemType={post}
+                    post={post}
                     onShowCommentPage={() => openCommentPage(post)}
                   />
                   {index !== postList.length - 1 && (
