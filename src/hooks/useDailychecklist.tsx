@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getData, postData, deleteData, putData } from "../util/api";
 import {
   DailyChecklistItemType,
@@ -10,6 +10,16 @@ const useDailyChecklist = (userId: string) => {
   const [dailyChecklist, setDailyChecklist] = useState<
     Array<DailyChecklistItemType>
   >([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  // 체크리스트 생성기 열기/닫기
+  const openDailyChecklistCreator = () => setIsOpen(true);
+  const closeDailyChecklistCreator = () => setIsOpen(false);
+
+  // 정렬된 체크리스트 반환
+  const sortedDailyChecklist = [...dailyChecklist].sort(
+    (a, b) => Number(a.isFinished) - Number(b.isFinished)
+  );
 
   // 데일리체크리스트 get
   const fetchChecklist = async () => {
@@ -20,10 +30,6 @@ const useDailyChecklist = (userId: string) => {
     setDailyChecklist(checklistData);
   };
 
-  useEffect(() => {
-    fetchChecklist();
-  }, [userId]);
-
   // 데일리체크리스트 추가
   const addPlan = async (inputPlan: string, inputImportance: Importance) => {
     const newPlan = {
@@ -33,14 +39,12 @@ const useDailyChecklist = (userId: string) => {
     };
 
     await postData<NewPlanType, void>(`daily-tasks/${userId}`, newPlan);
-
     await fetchChecklist();
   };
 
   // 데일리체크리스트 삭제
   const deletePlan = async (no: number) => {
     await deleteData(`daily-tasks/${no}`, { userId });
-
     await fetchChecklist();
   };
 
@@ -52,7 +56,16 @@ const useDailyChecklist = (userId: string) => {
     await fetchChecklist();
   };
 
-  return { dailyChecklist, addPlan, deletePlan, toggleDone };
+  return {
+    dailyChecklist,
+    sortedDailyChecklist,
+    isOpen,
+    openDailyChecklistCreator,
+    closeDailyChecklistCreator,
+    addPlan,
+    deletePlan,
+    toggleDone,
+  };
 };
 
 export default useDailyChecklist;

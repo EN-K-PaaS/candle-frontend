@@ -27,27 +27,6 @@ const CommentPage = (props: CommentPageProps) => {
         '점심 맛있게 드신 것만으로도 기분이 확 좋아지셨을 것 같아요! 무슨 음식 드셨는지 궁금해요~',
       profileImageURL: '',
     },
-    {
-      no: 3,
-      nickname: 'NickName5',
-      content:
-        '드라마 보면서 하루를 마무리하는 거 너무 좋죠! 어떤 드라마 보시는지 추천해 주세요!',
-      profileImageURL: '',
-    },
-    {
-      no: 4,
-      nickname: 'NickName6',
-      content:
-        '가을 바람 맞으면서 산책하니까 행복하고 기분도 좋아졌겠어요! 저도 산책하러 다녀와야겠어요!',
-      profileImageURL: '',
-    },
-    {
-      no: 5,
-      nickname: 'NickName8',
-      content:
-        '스트레스 받는 일도 있었지만, 긍정적으로 하루를 보내신 것 같아서 보기 좋아요!',
-      profileImageURL: '',
-    },
   ]);
 
   const addComment = () => {
