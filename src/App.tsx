@@ -8,18 +8,18 @@ import './App.css';
 import EmotionAnalysis from './pages/Emotion_Analysis';
 
 const App: React.FC = () => {
-    return (
-        <Router>
-            <div className="App">
-                <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/diary" element={<Diary />} />
-                    <Route path="/emotionanalysis" element={<EmotionAnalysis />} />
-                </Routes>
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/diary" element={<Diary />} />
+          <Route path="/emotionanalysis" element={<EmotionAnalysis />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 };
 
 export default App;
