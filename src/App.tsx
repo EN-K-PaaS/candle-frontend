@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import DailyChecklistContainer from './pages/DailyChecklist/DailyChecklistContainer';
 import MyGoal from './pages/MyGoal/MyGoalContainer';
-import Diary from './pages/Diary/Diary';
-import EmotionAnalysis from './pages/EmotionAnalysis/EmotionAnalysis';
+import Diary from './pages/Diary/index';
+import EmotionAnalysis from './pages/Emotion_Analysis/index';
 import Community from './pages/Community/Community';
 import NavBar from './components/NavBar';
 

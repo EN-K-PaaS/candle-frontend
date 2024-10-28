@@ -2,6 +2,22 @@ import { useState, useEffect } from 'react';
 import { PostItemType, NewPostType } from '../types/postItemTypes';
 import { getData, postData, checkForSlang } from '../util/api';
 
+interface Like {
+  id: number;
+}
+
+interface Post {
+  content: string;
+  image: string;
+  createdAt: string;
+}
+
+interface ResponseData {
+  id: number;
+  post: Post;
+  likes: Like[];
+}
+
 const useCommunity = (userId: string) => {
   const [showCommentPage, setShowCommentPage] = useState(false);
   const [selectedPost, setSelectedPost] = useState<PostItemType | null>(null);

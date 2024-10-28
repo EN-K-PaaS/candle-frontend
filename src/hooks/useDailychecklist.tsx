@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { getData, postData, deleteData, putData } from "../util/api";
+import { useState } from 'react';
+import { getData, postData, deleteData, putData } from '../util/api';
 import {
   DailyChecklistItemType,
   NewPlanType,
   Importance,
-} from "../types/dailyChecklistTypes";
+} from '../types/dailyChecklistTypes';
 
 const useDailyChecklist = (userId: string) => {
   const [dailyChecklist, setDailyChecklist] = useState<
@@ -22,9 +22,9 @@ const useDailyChecklist = (userId: string) => {
   );
 
   // 데일리체크리스트 get
-  const fetchChecklist = async () => {
+  const getChecklist = async () => {
     const checklistData = await getData<DailyChecklistItemType[]>(
-      "daily-tasks",
+      'daily-tasks',
       { userId }
     );
     setDailyChecklist(checklistData);
@@ -39,13 +39,13 @@ const useDailyChecklist = (userId: string) => {
     };
 
     await postData<NewPlanType, void>(`daily-tasks/${userId}`, newPlan);
-    await fetchChecklist();
+    await getChecklist();
   };
 
   // 데일리체크리스트 삭제
   const deletePlan = async (no: number) => {
     await deleteData(`daily-tasks/${no}`, { userId });
-    await fetchChecklist();
+    await getChecklist();
   };
 
   // 데일리체크리스트 토글
@@ -53,7 +53,7 @@ const useDailyChecklist = (userId: string) => {
     const data = { isFinished: true };
 
     await putData(`daily-tasks/${id}/complete`, data, { userId });
-    await fetchChecklist();
+    await getChecklist();
   };
 
   return {
