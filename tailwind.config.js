@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+<<<<<<< HEAD
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -37,5 +38,11 @@ module.exports = {
     },
   },
   variants: {},
+=======
+  content: ["./src/**/*.{ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+>>>>>>> 3e7da3c (Feat: NavBar 구성 완료)
   plugins: [],
 };

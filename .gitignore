@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,react
 
+<<<<<<< HEAD
 .env
 
 ### react ###
@@ -15,14 +16,31 @@ bower_components
 
 *.sublime*
 
+=======
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+>>>>>>> 3e7da3c (Feat: NavBar 구성 완료)
 psd
 thumb
 sketch
 
+<<<<<<< HEAD
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+=======
+>>>>>>> 3e7da3c (Feat: NavBar 구성 완료)
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
