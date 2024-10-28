@@ -2,6 +2,9 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,react
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cbf01c1 (Feat: api와 관련된 함수 모은 api.tsx 파일 추가, Community에 checkForSlang부분 추가해서 게시글 등록할 때 비속어 확인하는 부분 추가,)
 .env
 
 ### react ###
