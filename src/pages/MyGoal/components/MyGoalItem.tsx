@@ -13,10 +13,14 @@ import { MyGoalItemType } from "../MyGoalContainer";
 import MyGoalEditor from "./MyGoalEditor";
 
 type MyGoalItemProps = {
-  myGoal: Array<MyGoalItemType>;
+  myGoals: Array<MyGoalItemType>;
   deleteGoal: (no: number) => void;
+<<<<<<< HEAD
   editGoal: (no: number, progress: number, deadline: Date) => void;
 >>>>>>> e3ca5d8 (Refactor: MyGoal.tsx를 MyGoalItem.tsx로 수정함)
+=======
+  editGoal: (goal: MyGoalItemType) => void;
+>>>>>>> d6785cd (Feat: ArrowButton, MyGoalList파일 추가, MyGoalContainer에 processing과 completed나눌 수 있도록 하는 부분 추가)
 };
 
 const MyGoalItem = (props: MyGoalItemProps) => {
@@ -55,6 +59,7 @@ const MyGoalItem = (props: MyGoalItemProps) => {
   return (
     <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
       {props.myGoals.map((item) => (
         <div
           key={item.no}
@@ -63,6 +68,9 @@ const MyGoalItem = (props: MyGoalItemProps) => {
             <span className={'text-xs absolute left-7 font-semibold'}>
 =======
       {props.myGoal.map((item) => (
+=======
+      {props.myGoals.map((item) => (
+>>>>>>> d6785cd (Feat: ArrowButton, MyGoalList파일 추가, MyGoalContainer에 processing과 completed나눌 수 있도록 하는 부분 추가)
         <div
           key={item.no}
           className="relative flex items-center w-2/3 h-16 p-4 mx-auto bg-white border border-gray-300 rounded-sm"
@@ -121,12 +129,16 @@ const MyGoalItem = (props: MyGoalItemProps) => {
       {isOpen && selectedGoal && (
         <MyGoalEditor
 <<<<<<< HEAD
+<<<<<<< HEAD
           goal={selectedGoal}
 =======
           no={selectedGoal.no}
           progress={selectedGoal.progress}
           deadline={selectedGoal.deadline}
 >>>>>>> e3ca5d8 (Refactor: MyGoal.tsx를 MyGoalItem.tsx로 수정함)
+=======
+          goal={selectedGoal}
+>>>>>>> d6785cd (Feat: ArrowButton, MyGoalList파일 추가, MyGoalContainer에 processing과 completed나눌 수 있도록 하는 부분 추가)
           onClose={closeMyGoalEditor}
           deleteGoal={props.deleteGoal}
           editGoal={props.editGoal}
