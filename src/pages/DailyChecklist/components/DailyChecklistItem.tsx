@@ -1,7 +1,7 @@
 import {
   DailyChecklistItemType,
   Importance,
-} from "../../../types/dailyChecklistTypes";
+} from '../../../types/dailyChecklistTypes';
 
 type DailyChecklistItemProps = {
   dailyChecklist: Array<DailyChecklistItemType>;
@@ -17,22 +17,22 @@ const DailyChecklistItem = (props: DailyChecklistItemProps) => {
 
     switch (importance) {
       case 0:
-        return "text-blue-500 border-blue-500 w-16 px-5";
+        return 'text-blue-500 border-blue-500 w-16 px-5';
       case 1:
-        return "px-5 text-yellow-500 border-yellow-500 w-16";
+        return 'px-5 text-yellow-500 border-yellow-500 w-16';
       case 2:
-        return "px-3 text-red-500 border-red-500";
+        return 'px-3 text-red-500 border-red-500';
     }
   };
 
   const getIsDoneColor = (importance: Importance) => {
     switch (importance) {
       case 0:
-        return "text-gray-400 border-gray-400 w-16 px-5";
+        return 'text-gray-400 border-gray-400 w-16 px-5';
       case 1:
-        return "text-gray-400 border-gray-400 w-16 px-5";
+        return 'text-gray-400 border-gray-400 w-16 px-5';
       case 2:
-        return "text-gray-400 border-gray-400 px-3";
+        return 'text-gray-400 border-gray-400 px-3';
     }
   };
 
@@ -41,26 +41,22 @@ const DailyChecklistItem = (props: DailyChecklistItemProps) => {
       {props.dailyChecklist.map((item) => (
         <div
           key={item.id}
-          className="relative flex items-center w-2/3 h-16 p-4 mx-auto bg-white border border-gray-300 rounded-sm"
-        >
+          className="relative flex items-center w-2/3 h-16 p-4 mx-auto bg-white border border-gray-300 rounded-sm">
           <div className="flex items-center">
             <button
               className="w-3 h-3 mr-2 bg-white border border-gray-400 rounded-sm"
-              onClick={() => props.toggleDone(item.id)}
-            ></button>
+              onClick={() => props.toggleDone(item.id)}></button>
             <span
               className={`${
-                item.isFinished ? "text-gray-400" : "text-darkGray"
-              } text-xs absolute left-14 font-semibold`}
-            >
+                item.isFinished ? 'text-gray-400' : 'text-darkGray'
+              } text-xs absolute left-14 font-semibold`}>
               {item.title}
             </span>
           </div>
           <span
             className={`${getImportanceColor(item.rank, item.isFinished)} 
-                      border rounded-lg text-[10px] absolute right-20 `}
-          >
-            {["보통", "중요", "매우 중요"][item.rank]}
+                      border rounded-lg text-[10px] absolute right-20 `}>
+            {['보통', '중요', '매우 중요'][item.rank]}
           </span>
           <img
             src="/icons/trash-icon.png"
