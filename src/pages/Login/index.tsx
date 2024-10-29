@@ -16,9 +16,7 @@ const Login = () => {
     const userInfo = { id: id, password: password };
 
     try {
-      console.log('POST 요청 데이터:', JSON.stringify(userInfo, null, 2));
       await postData<typeof userInfo, void>('users/login', userInfo);
-
       navigate('/dailyChecklist');
     } catch (error) {
       console.error('Login failed', error);

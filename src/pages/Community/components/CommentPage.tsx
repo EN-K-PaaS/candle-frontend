@@ -1,49 +1,16 @@
 import Comment from './Comment';
 import { PostItemType } from '../../../types/postItemTypes';
-import { CommentItemType } from '../../../types/commentItemTypes';
-import { useState } from 'react';
 import CommentInput from '../../../components/CommentInput';
+import useCommentPage from '../../../hooks/useCommentPage';
 
 interface CommentPageProps {
   post: PostItemType;
   onClose: () => void;
 }
 
-const CommentPage = (props: CommentPageProps) => {
-  const [inputComment, setInputComment] = useState<string>('');
-  const [commentList, setCommentList] = useState<Array<CommentItemType>>([
-    {
-      no: 1,
-      nickname: 'NickName3',
-      content:
-        '오늘 하루도 고생 많으셨어요! 가을 바람 느끼면서 산책하는 시간, 참 좋을 것 같아요.',
-      profileImageURL:
-        'https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D​',
-    },
-    {
-      no: 2,
-      nickname: 'NickName4',
-      content:
-        '점심 맛있게 드신 것만으로도 기분이 확 좋아지셨을 것 같아요! 무슨 음식 드셨는지 궁금해요~',
-      profileImageURL: '',
-    },
-  ]);
-
-  const addComment = () => {
-    if (inputComment.trim() === '') return;
-
-    const newCommentList = [
-      ...commentList,
-      {
-        no: commentList.length + 1,
-        nickname: 'nickname',
-        content: inputComment,
-        profileImageURL: '',
-      },
-    ];
-    setCommentList(newCommentList);
-    setInputComment('');
-  };
+const CommentPage = (props: CommentPageProps, userId: string) => {
+  const { inputComment, setInputComment, commentList, addComment } =
+    useCommentPage(props.post, userId);
 
   return (
     <div

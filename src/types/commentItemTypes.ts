@@ -4,3 +4,10 @@ export type CommentItemType = {
   content: string;
   profileImageURL: string;
 };
+
+export type NewCommentType = {
+  communityId: number;
+  userId: string;
+  content: string;
+  image: string;
+};
