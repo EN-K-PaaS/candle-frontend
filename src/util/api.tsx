@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from 'axios';
 
 interface KeywordData {
   text: string;
@@ -66,12 +66,12 @@ export const putData = async <T,>(
 // 비속어 확인
 export const checkForSlang = async (document: string): Promise<boolean> => {
   const response = await axios.post<KeywordResponse>(
-    "https://api.matgim.ai/54edkvw2hn/api-keyword-slang",
+    'https://api.matgim.ai/54edkvw2hn/api-keyword-slang',
     { document },
     {
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": process.env.REACT_APP_API_KEY,
+        'Content-Type': 'application/json',
+        'x-auth-token': process.env.REACT_APP_API_KEY,
       },
     }
   );
