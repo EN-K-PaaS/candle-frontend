@@ -3,7 +3,7 @@ import Login from './pages/Login';
 import DailyChecklistContainer from './pages/DailyChecklist/DailyChecklistContainer';
 import MyGoal from './pages/MyGoal/MyGoalContainer';
 import Diary from './pages/Diary/DiaryContainer';
-import EmotionAnalysis from './pages/Emotion_Analysis/EmotionAnalysisContainer';
+import EmotionAnalysis from './pages/Emotion_Analysis';
 import Community from './pages/Community/Community';
 
 const App = () => {

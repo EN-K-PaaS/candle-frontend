@@ -80,3 +80,5 @@ export const checkForSlang = async (document: string): Promise<boolean> => {
 
   return response.data.result.data.length > 0;
 };
+
+
