@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import DailyChecklistContainer from './pages/DailyChecklist/DailyChecklistContainer';
 import MyGoal from './pages/MyGoal/MyGoalContainer';
-import Diary from './pages/Diary/index';
-import EmotionAnalysis from './pages/Emotion_Analysis/index';
+import Diary from './pages/Diary/DiaryContainer';
+import EmotionAnalysis from './pages/Emotion_Analysis/EmotionAnalysisContainer';
 import Community from './pages/Community/Community';
 
 const App = () => {
