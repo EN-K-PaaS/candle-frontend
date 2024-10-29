@@ -17,6 +17,7 @@ const Login = () => {
 
     try {
       await postData<typeof userInfo, void>('users/login', userInfo);
+      localStorage.setItem('userId', id); // id 값을 로컬 스토리지에 저장
       navigate('/dailyChecklist');
     } catch (error) {
       console.error('Login failed', error);
