@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'; // useLocation 임포트
 import useDiary from '../../hooks/useDiary'; // useDiary 훅 임포트
 import { Diary } from '../../types/diaryTypes'; // Diary 타입 임포트
 
 const DiaryContainer = () => {
-    const userId = '회원 아이디'; // 실제 사용자 ID로 변경
+    const { state } = useLocation(); // useLocation을 사용하여 state 가져오기
+    const userId = state?.userId || 'Temp_ID'; // 사용자 ID 가져오기
     const { diaries, loading, addDiary, updateDiary, deleteDiary } = useDiary(userId);
     
     const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
