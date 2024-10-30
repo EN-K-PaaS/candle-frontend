@@ -10,6 +10,7 @@ const useDiary = (userId: string) => {
         setLoading(true);
         try {
             const fetchedDiaries = await getData<Diary[]>(`diaries?userId=${userId}`);
+            console.log('Fetched Diaries:', fetchedDiaries);
             setDiaries(fetchedDiaries);
         } catch (error) {
             console.error('다이어리 조회 오류:', error);
@@ -21,9 +22,13 @@ const useDiary = (userId: string) => {
     const addDiary = async (newDiary: Omit<Diary, 'id' | 'createdAt'>) => {
         try {
             const createdDiary = await postData<Diary, Diary>('diaries', {
-                ...newDiary,
+                userId: newDiary.userId,
+                title: newDiary.title,
+                progress: newDiary.progress,
+                goalDate: newDiary.goalDate,
                 createdAt: new Date().toISOString(),
-                id: ''
+                id: '',
+                content: newDiary.content
             });
             setDiaries((prev) => [...prev, createdDiary]);
         } catch (error) {
@@ -63,6 +68,7 @@ const useDiary = (userId: string) => {
         addDiary,
         updateDiary,
         deleteDiary,
+        getDiaries,
     };
 };
 

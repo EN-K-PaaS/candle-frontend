@@ -4,9 +4,8 @@ import useDiary from '../../hooks/useDiary'; // useDiary 훅 임포트
 import { Diary } from '../../types/diaryTypes'; // Diary 타입 임포트
 
 const DiaryContainer = () => {
-    const { state } = useLocation(); // useLocation을 사용하여 state 가져오기
-    const userId = state?.userId || 'Temp_ID'; // 사용자 ID 가져오기
-    const { diaries, loading, addDiary, updateDiary, deleteDiary } = useDiary(userId);
+    const userId = localStorage.getItem('userId') || 'Temp_ID'; // 사용자 ID 가져오기
+    const { diaries, loading, addDiary, updateDiary, deleteDiary, getDiaries } = useDiary(userId);
     
     const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
     const [title, setTitle] = useState('');
@@ -27,23 +26,30 @@ const DiaryContainer = () => {
             if (selectedEntry !== null) {
                 // 선택된 일기를 업데이트
                 const updatedEntry: Omit<Diary, 'id' | 'createdAt'> = {
+                    userId: diaries[selectedEntry].userId,
                     title,
                     content,
+                    progress: diaries[selectedEntry].progress,
+                    goalDate: diaries[selectedEntry].goalDate,
                 };
 
                 await updateDiary(diaries[selectedEntry].id, updatedEntry);
-                setIsPopupOpen(false);
                 console.log('일기가 수정되었습니다. ID:', diaries[selectedEntry].id);
             } else {
                 // 새로운 일기 추가
                 const newEntry: Omit<Diary, 'id' | 'createdAt'> = {
+                    userId: userId,
                     title,
                     content,
+                    progress: 0,
+                    goalDate: new Date().toISOString(),
                 };
                 await addDiary(newEntry);
-                setIsPopupOpen(false);
                 console.log('다이어리가 추가되었습니다.');
             }
+            // 일기 추가 또는 수정 후 최신 데이터 가져오기
+            await getDiaries(); // useDiary에서 가져온 getDiaries 호출
+            setIsPopupOpen(false);
         } catch (error) {
             console.error('다이어리 항목 저장 오류:', error);
         }
@@ -111,15 +117,19 @@ const DiaryContainer = () => {
                             </h2>
 
                             <ul className="h-[calc(100%-6rem)] overflow-y-auto">
-                                {diaries.map((entry, index) => (
-                                    <li
-                                        key={entry.id}
-                                        onClick={() => handleEntryClick(index)}
-                                        className={`p-2 cursor-pointer font-poppins font-semibold text-[17px] ${selectedEntry === index ? 'bg-[#D3D3D3] shadow-text' : ''}`}
-                                        style={{ color: '#2E4EA6', textAlign: 'left' }}>
-                                        {entry.title}
-                                    </li>
-                                ))}
+                                {diaries.length > 0 ? (
+                                    diaries.map((entry, index) => (
+                                        <li
+                                            key={entry.id}
+                                            onClick={() => handleEntryClick(index)}
+                                            className={`p-2 cursor-pointer font-poppins font-semibold text-[17px] ${selectedEntry === index ? 'bg-[#D3D3D3] shadow-text' : ''}`}
+                                            style={{ color: '#2E4EA6', textAlign: 'left' }}>
+                                            {entry.title}
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li>일기가 없습니다.</li> // 일기가 없을 때 메시지
+                                )}
                             </ul>
                             <button
                                 onClick={handleAddNewEntry}
