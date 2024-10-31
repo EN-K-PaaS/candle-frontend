@@ -1,18 +1,29 @@
 import CommentInput from '../../Community/components/CommentInput';
 import { useState } from 'react';
 import { PostItemType } from '../../../types/postItemTypes';
+import { postData } from '../../../util/api';
+import { NewCommentType } from '../../../types/commentItemTypes';
 
 interface PostProps {
   post: PostItemType;
+  userId: string;
   onShowCommentPage: () => void;
 }
 
 const Post = (props: PostProps) => {
   const [inputComment, setInputComment] = useState<string>('');
 
-  const addComment = () => {
+  const addComment = async () => {
     if (inputComment.trim() === '') return;
 
+    const newComment = {
+      communityId: props?.post?.id!,
+      userId: props.userId,
+      content: props?.post?.content || '',
+      image: '',
+    };
+
+    await postData<NewCommentType, void>(`community/comments`, newComment);
     setInputComment('');
   };
 
