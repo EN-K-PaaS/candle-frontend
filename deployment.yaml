@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: candle-frontend
+  labels:
+    app: candle-frontend
+spec:
+  replicas: 2 # 원하는 복제본 수
+  selector:
+    matchLabels:
+      app: candle-frontend
+  template:
+    metadata:
+      labels:
+        app: candle-frontend
+    spec:
+      containers:
+        - name: candle-frontend
+          image: contest89-app/candle-frontend:1.0 # 빌드된 Docker 이미지
+          ports:
+            - containerPort: 80
