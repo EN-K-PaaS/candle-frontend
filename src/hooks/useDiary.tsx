@@ -12,6 +12,7 @@ const useDiary = (userId: string) => {
             const fetchedDiaries = await getData<Diary[]>(`diaries?userId=${userId}`);
             console.log('Fetched Diaries:', fetchedDiaries);
             setDiaries(fetchedDiaries);
+            console.log('Updated Diaries State:', fetchedDiaries);
         } catch (error) {
             console.error('다이어리 조회 오류:', error);
         } finally {
