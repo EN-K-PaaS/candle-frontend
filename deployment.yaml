@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: candle-frontend
-          image: contest89-app/candle-frontend:1.0 # 빌드된 Docker 이미지
+          image: contest89-app.kr.ncr.ntruss.com/candle-frontend:1
           ports:
             - containerPort: 80
