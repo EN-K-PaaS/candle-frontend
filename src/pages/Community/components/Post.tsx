@@ -20,7 +20,7 @@ const Post = (props: PostProps) => {
       communityId: props?.post?.id!,
       userId: props.userId,
       content: props?.post?.content || '',
-      // image: post?.imageURL || '',
+      image: '',
     };
 
     await postData<NewCommentType, void>(`community/comments`, newComment);
