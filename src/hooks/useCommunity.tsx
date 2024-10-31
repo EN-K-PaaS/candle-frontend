@@ -2,20 +2,23 @@ import { useState, useEffect } from 'react';
 import { PostItemType, NewPostType } from '../types/postItemTypes';
 import { getData, postData, checkForSlang } from '../util/api';
 
-interface Like {
-  id: number;
+interface Comment {
+  communityId: number;
+  userId: string;
+  content: string;
+  image: string;
 }
 
-interface Post {
+interface ApiResponse {
+  userId: string;
+  userName: string;
+  id: number;
+  title: string;
   content: string;
   image: string;
   createdAt: string;
-}
-
-interface ResponseData {
-  id: number;
-  post: Post;
-  likes: Like[];
+  likeCount: number;
+  comments: Comment[];
 }
 
 const useCommunity = (userId: string) => {
@@ -36,8 +39,18 @@ const useCommunity = (userId: string) => {
   };
 
   const getPostList = async () => {
-    const postData = await getData<PostItemType[]>('communities', { userId });
-    setPostList(postData);
+    const responseData = await getData<ApiResponse[]>('communities');
+
+    const filteredData: PostItemType[] = responseData.map(
+      ({ userName, content, id, comments }) => ({
+        userName,
+        content,
+        id,
+        comments,
+      })
+    );
+
+    setPostList(filteredData);
   };
 
   useEffect(() => {
@@ -60,7 +73,7 @@ const useCommunity = (userId: string) => {
       image: '',
     };
 
-    await postData<NewPostType, void>(`communities/${userId}`, newPost);
+    await postData<NewPostType, void>(`communities`, newPost);
 
     setInputContent('');
 

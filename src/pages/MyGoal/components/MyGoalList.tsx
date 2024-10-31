@@ -1,6 +1,6 @@
-import ArrowButton from "./ArrowButton";
-import MyGoalItem from "./MyGoalItem";
-import { MyGoalItemType } from "../MyGoalContainer";
+import ArrowButton from './ArrowButton';
+import MyGoalItem from './MyGoalItem';
+import { MyGoalItemType } from '../../../types/myGoalItemTypes';
 
 interface MyGoalListprops {
   status: string;
@@ -14,7 +14,7 @@ interface MyGoalListprops {
 
 const MyGoalList = (props: MyGoalListprops) => {
   const setStatusColor = () => {
-    return props.status === "PROCESSING" ? "text-yellow-500" : "text-green-400";
+    return props.status === 'PROCESSING' ? 'text-yellow-500' : 'text-green-400';
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MyGoalItemType } from '../MyGoalContainer';
+import { MyGoalItemType } from '../../../types/myGoalItemTypes';
 import MyGoalEditor from './MyGoalEditor';
 
 type MyGoalItemProps = {
@@ -35,18 +35,18 @@ const MyGoalItem = (props: MyGoalItemProps) => {
     <div>
       {props.myGoals.map((item) => (
         <div
-          key={item.no}
+          key={item.id}
           className="relative flex items-center w-2/3 h-16 p-4 mx-auto bg-white border border-gray-300 rounded-sm">
           <div className="flex items-center">
             <span className={'text-xs absolute left-7 font-semibold'}>
-              {item.goal}
+              {item.title}
             </span>
           </div>
           <span
             className={
               'border rounded-lg text-[10px] absolute right-72 font-balck'
             }>
-            {item.deadline.toLocaleDateString()}
+            {new Date(item.goalDate).toLocaleDateString()}
           </span>
 
           <span

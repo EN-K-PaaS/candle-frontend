@@ -10,5 +10,5 @@ export type DailyChecklistItemType = {
 export type NewPlanType = {
   userId: string;
   title: string;
-  priority: Importance;
+  priority: number;
 };

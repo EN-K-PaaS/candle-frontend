@@ -14,6 +14,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const userInfo = { id: id, password: password };
+    console.log('POST 요청 데이터:', JSON.stringify(userInfo, null, 2));
 
     try {
       await postData<typeof userInfo, void>('users/login', userInfo);

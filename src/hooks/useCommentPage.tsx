@@ -1,19 +1,7 @@
 import { useState } from 'react';
 import { CommentItemType, NewCommentType } from '../types/commentItemTypes';
-import { getData, postData, deleteData, putData } from '../util/api';
+import { getData, postData } from '../util/api';
 import { PostItemType } from '../types/postItemTypes';
-
-interface CommentResponseType {
-  id: number;
-  post: {
-    content: string;
-    image: string;
-    createdAt: string;
-  };
-  likes: Array<{
-    id: number;
-  }>;
-}
 
 const useCommentPage = (post: PostItemType, userId: string) => {
   const [inputComment, setInputComment] = useState<string>('');
@@ -21,7 +9,7 @@ const useCommentPage = (post: PostItemType, userId: string) => {
 
   const getCommentList = async () => {
     const commentListData = await getData<CommentItemType[]>(
-      `community/comments/${post?.no!}`,
+      `community/comments/${post?.id!}`,
       { userId }
     );
     setCommentList(commentListData);
@@ -31,10 +19,10 @@ const useCommentPage = (post: PostItemType, userId: string) => {
     if (inputComment.trim() === '') return;
 
     const newComment = {
-      communityId: post?.no!,
+      communityId: post?.id!,
       userId: userId,
       content: post?.content || '',
-      image: post?.imageURL || '',
+      // image: post?.imageURL || '',
     };
 
     await postData<NewCommentType, void>(`community/comments`, newComment);
