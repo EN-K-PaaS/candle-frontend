@@ -1,4 +1,4 @@
-import CommentInput from '../../../components/CommentInput';
+import CommentInput from '../../Community/components/CommentInput';
 import { useState } from 'react';
 import { PostItemType } from '../../../types/postItemTypes';
 

@@ -1,4 +1,4 @@
-import HeartButton from '../../../components/HeartButton';
+import HeartButton from '../../Community/components/HeartButton';
 import { CommentItemType } from '../../../types/commentItemTypes';
 
 const Comment = (props: CommentItemType) => {

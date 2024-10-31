@@ -9,8 +9,6 @@ const DailyChecklistCreator = (props: DailyChecklistCreatorProps) => {
   const [plan, setPlan] = useState<string>('');
   const [selectedImportance, setImportance] = useState<number>(1);
 
-  // const importances = ['보통', '중요', '매우 중요'];
-
   const selectImportance = (index: number) => {
     setImportance(index);
   };
@@ -49,7 +47,7 @@ const DailyChecklistCreator = (props: DailyChecklistCreatorProps) => {
           <div className="flex justify-center mt-5">
             {importances.map(
               (imp, index) =>
-                index > 0 && ( // index가 0일 때는 렌더링하지 않음
+                index > 0 && (
                   <button
                     key={imp}
                     onClick={() => selectImportance(index)}

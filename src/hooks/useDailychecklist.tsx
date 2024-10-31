@@ -22,11 +22,15 @@ const useDailyChecklist = (userId: string) => {
 
   // 데일리체크리스트 get
   const getChecklist = async () => {
-    const checklistData = await getData<DailyChecklistItemType[]>(
-      'daily-tasks',
-      { userId }
-    );
-    setDailyChecklist(checklistData);
+    try {
+      const checklistData = await getData<DailyChecklistItemType[]>(
+        'daily-tasks',
+        { userId }
+      );
+      setDailyChecklist(checklistData);
+    } catch (error) {
+      setDailyChecklist([]);
+    }
   };
 
   useEffect(() => {

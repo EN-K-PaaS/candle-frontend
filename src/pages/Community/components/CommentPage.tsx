@@ -1,6 +1,6 @@
 import Comment from './Comment';
 import { PostItemType } from '../../../types/postItemTypes';
-import CommentInput from '../../../components/CommentInput';
+import CommentInput from '../../Community/components/CommentInput';
 import useCommentPage from '../../../hooks/useCommentPage';
 
 interface CommentPageProps {

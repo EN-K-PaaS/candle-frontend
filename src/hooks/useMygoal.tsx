@@ -22,20 +22,23 @@ const useMyGoal = (userId: string) => {
 
   // 목표 get
   const getMyGoal = async () => {
-    const responseData = await getData<ApiResponse[]>('goals', {
-      userId,
-    });
+    try {
+      const responseData = await getData<ApiResponse[]>('goals', {
+        userId,
+      });
 
-    const filteredData: MyGoalItemType[] = responseData.map(
-      ({ id, goalDate, title, progress }) => ({
-        id,
-        goalDate,
-        title,
-        progress,
-      })
-    );
-
-    setMyGoal(filteredData);
+      const filteredData: MyGoalItemType[] = responseData.map(
+        ({ id, goalDate, title, progress }) => ({
+          id,
+          goalDate,
+          title,
+          progress,
+        })
+      );
+      setMyGoal(filteredData);
+    } catch {
+      setMyGoal([]);
+    }
   };
 
   useEffect(() => {

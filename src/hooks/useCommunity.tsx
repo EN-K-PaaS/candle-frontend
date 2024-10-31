@@ -39,18 +39,22 @@ const useCommunity = (userId: string) => {
   };
 
   const getPostList = async () => {
-    const responseData = await getData<ApiResponse[]>('communities');
+    try {
+      const responseData = await getData<ApiResponse[]>('communities');
 
-    const filteredData: PostItemType[] = responseData.map(
-      ({ userName, content, id, comments }) => ({
-        userName,
-        content,
-        id,
-        comments,
-      })
-    );
+      const filteredData: PostItemType[] = responseData.map(
+        ({ userName, content, id, comments }) => ({
+          userName,
+          content,
+          id,
+          comments,
+        })
+      );
 
-    setPostList(filteredData);
+      setPostList(filteredData);
+    } catch {
+      setPostList([]);
+    }
   };
 
   useEffect(() => {
