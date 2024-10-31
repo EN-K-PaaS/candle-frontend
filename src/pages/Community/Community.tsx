@@ -1,11 +1,9 @@
-import { useLocation } from 'react-router-dom';
 import useCommunity from '../../hooks/useCommunity';
 import Post from './components/Post';
 import CommentPage from './components/CommentPage';
 
 const Community = () => {
-  const { state } = useLocation();
-  const userId = state?.userId || 'Temp_ID';
+  const userId = localStorage.getItem('userId')!;
   const {
     showCommentPage,
     selectedPost,
@@ -50,7 +48,7 @@ const Community = () => {
             .reverse()
             .map((post, index) =>
               post != null ? (
-                <div key={post.no}>
+                <div key={post.id}>
                   <Post
                     post={post}
                     onShowCommentPage={() => openCommentPage(post)}

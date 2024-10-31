@@ -1,11 +1,15 @@
-export type PostItemType = {
-  no: number;
-  nickname: string;
+export type CommentType = {
+  communityId: number;
+  userId: string;
   content: string;
-  createdAt: Date;
-  likes: number;
-  imageURL: string | null;
-  profileImageURL?: string;
+  image: string;
+};
+
+export type PostItemType = {
+  id: number;
+  userName: string;
+  content: string;
+  comments: CommentType[];
 } | null;
 
 export type NewPostType = {

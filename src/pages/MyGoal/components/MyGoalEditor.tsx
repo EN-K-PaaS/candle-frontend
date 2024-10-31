@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MyGoalItemType } from '../MyGoalContainer';
+import { MyGoalItemType } from '../../../types/myGoalItemTypes';
 
 interface MyGoalEditorProps {
   goal: MyGoalItemType;
@@ -10,7 +10,7 @@ interface MyGoalEditorProps {
 
 const MyGoalEditor = (props: MyGoalEditorProps) => {
   const [progress, setProgress] = useState<number>(props.goal.progress);
-  const [deadline, setDeadline] = useState<Date>(props.goal.deadline);
+  const [deadline, setDeadline] = useState<Date>(props.goal.goalDate);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDeadline(new Date(e.target.value));
@@ -27,7 +27,7 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
 
   const handleSubmit = () => {
     props.goal.progress = progress;
-    props.goal.deadline = deadline;
+    props.goal.goalDate = deadline;
     props.editGoal(props.goal);
     props.onClose();
   };

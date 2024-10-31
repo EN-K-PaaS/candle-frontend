@@ -1,6 +1,6 @@
 import Comment from './Comment';
 import { PostItemType } from '../../../types/postItemTypes';
-import CommentInput from '../../../components/CommentInput';
+import CommentInput from '../../Community/components/CommentInput';
 import useCommentPage from '../../../hooks/useCommentPage';
 
 interface CommentPageProps {
@@ -22,13 +22,14 @@ const CommentPage = (props: CommentPageProps, userId: string) => {
         <div className="w-1/2 px-5 border-r">
           <div className="flex items-center mb-4 space-x-4">
             <div className="w-10 h-10 mb-2 mr-3 rounded-full">
-              <img
+              {/* <img
                 src={props.post?.profileImageURL}
-                alt={`${props.post?.nickname}'s profile`}
+                alt={`${props.post?.userName}'s profile`}
                 className="w-full h-full rounded-full"
-              />
+              /> */}
+              <div className="w-10 h-10 mb-2 mr-3 rounded-full bg-buttonBlue"></div>
             </div>
-            <div className="text-lg font-bold">{props.post?.nickname}</div>
+            <div className="text-lg font-bold">{props.post?.userName}</div>
           </div>
           <p className="pt-2 mb-4 text-gray-700">{props.post?.content}</p>
         </div>
@@ -49,7 +50,7 @@ const CommentPage = (props: CommentPageProps, userId: string) => {
             )}
           </div>
           <CommentInput
-            containerClassName="pt-3 space-x-4"
+            containerClassName="pt-3 space-x-4 pb-20"
             inputValue={inputComment}
             onInputChange={(e) => setInputComment(e.target.value)}
             onSubmit={addComment}

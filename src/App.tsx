@@ -11,6 +11,7 @@ import Diary from './pages/Diary/DiaryContainer';
 import EmotionAnalysis from './pages/Emotion_Analysis/EmotionAnalysisContainer';
 import Community from './pages/Community/Community';
 import NavBar from './components/NavBar';
+import SignUp from './pages/SignUp';
 
 const App = () => {
   return (
@@ -25,9 +26,13 @@ const Content = () => {
 
   return (
     <div>
-      {location.pathname !== '/' && <NavBar />}
+      {location.pathname !== '/' && location.pathname !== '/signup' && (
+        <NavBar />
+      )}
+
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/dailyChecklist" element={<DailyChecklistContainer />} />
         <Route path="/myGoal" element={<MyGoal />} />
         <Route path="/diary" element={<Diary />} />

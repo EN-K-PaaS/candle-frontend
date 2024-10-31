@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getData, postData, deleteData, putData } from '../util/api';
 import {
   DailyChecklistItemType,
   NewPlanType,
-  Importance,
 } from '../types/dailyChecklistTypes';
 
 const useDailyChecklist = (userId: string) => {
@@ -23,36 +22,42 @@ const useDailyChecklist = (userId: string) => {
 
   // 데일리체크리스트 get
   const getChecklist = async () => {
-    const checklistData = await getData<DailyChecklistItemType[]>(
-      'daily-tasks',
-      { userId }
-    );
-    setDailyChecklist(checklistData);
+    try {
+      const checklistData = await getData<DailyChecklistItemType[]>(
+        'daily-tasks',
+        { userId }
+      );
+      setDailyChecklist(checklistData);
+    } catch (error) {
+      setDailyChecklist([]);
+    }
   };
 
+  useEffect(() => {
+    getChecklist();
+  }, [userId]);
+
   // 데일리체크리스트 추가
-  const addPlan = async (inputPlan: string, inputImportance: Importance) => {
+  const addPlan = async (inputPlan: string, inputImportance: number) => {
     const newPlan = {
       userId: userId,
       title: inputPlan,
       priority: inputImportance,
     };
+    await postData<NewPlanType, void>(`daily-tasks`, newPlan);
 
-    await postData<NewPlanType, void>(`daily-tasks/${userId}`, newPlan);
     await getChecklist();
   };
 
   // 데일리체크리스트 삭제
   const deletePlan = async (no: number) => {
-    await deleteData(`daily-tasks/${no}`, { userId });
+    await deleteData(`daily-tasks/${no}`, {});
     await getChecklist();
   };
 
   // 데일리체크리스트 토글
   const toggleDone = async (id: number) => {
-    const data = { isFinished: true };
-
-    await putData(`daily-tasks/${id}/complete`, data, { userId });
+    await putData(`daily-tasks/${id}/complete`, {});
     await getChecklist();
   };
 

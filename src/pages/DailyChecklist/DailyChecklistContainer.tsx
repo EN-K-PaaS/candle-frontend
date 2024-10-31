@@ -1,10 +1,8 @@
-import { useLocation } from 'react-router-dom';
 import DailyChecklistCreator from './components/DailyChecklistCreator';
 import DailyChecklistItem from './components/DailyChecklistItem';
 import useDailyChecklist from '../../hooks/useDailychecklist';
 
 const DailyChecklistContainer = () => {
-  const { state } = useLocation();
   const userId = localStorage.getItem('userId')!;
 
   const {
@@ -21,7 +19,6 @@ const DailyChecklistContainer = () => {
     <div className="min-h-screen p-8 bg-gray-100">
       <div className="flex items-center justify-between px-20">
         <div className="text-2xl font-black text-black">데일리 체크리스트</div>
-        <h1>Welcome, {userId}!</h1>
         <button
           onClick={openDailyChecklistCreator}
           className="px-3 py-1 mr-16 text-white rounded-lg x-30 bg-buttonBlue">

@@ -1,25 +1,24 @@
 import { useState } from 'react';
-import { Importance } from '../../../types/dailyChecklistTypes';
 
 interface DailyChecklistCreatorProps {
   onClose: () => void;
-  addPlan: (inputPlan: string, inputImportance: Importance) => void;
+  addPlan: (inputPlan: string, inputImportance: number) => void;
 }
 
 const DailyChecklistCreator = (props: DailyChecklistCreatorProps) => {
   const [plan, setPlan] = useState<string>('');
-  const [selectedImportance, setImportance] = useState<number>(0);
-
-  const importances = ['보통', '중요', '매우 중요'];
+  const [selectedImportance, setImportance] = useState<number>(1);
 
   const selectImportance = (index: number) => {
     setImportance(index);
   };
 
   const handleSubmit = () => {
-    props.addPlan(plan, selectedImportance as Importance);
+    props.addPlan(plan, selectedImportance);
     props.onClose();
   };
+
+  const importances = ['숨김', '보통', '중요', '매우 중요'];
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -46,18 +45,21 @@ const DailyChecklistCreator = (props: DailyChecklistCreatorProps) => {
             중요도
           </label>
           <div className="flex justify-center mt-5">
-            {importances.map((imp, index) => (
-              <button
-                key={imp}
-                onClick={() => selectImportance(index)}
-                className={`px-3 mx-5 border border-gray-300 rounded-lg text-gray-400 ${
-                  selectedImportance === index
-                    ? 'bg-pastelPurple text-white'
-                    : 'bg-white'
-                }`}>
-                {imp}
-              </button>
-            ))}
+            {importances.map(
+              (imp, index) =>
+                index > 0 && (
+                  <button
+                    key={imp}
+                    onClick={() => selectImportance(index)}
+                    className={`px-3 mx-5 border border-gray-300 rounded-lg text-gray-400 ${
+                      selectedImportance === index
+                        ? 'bg-pastelPurple text-white'
+                        : 'bg-white'
+                    }`}>
+                    {imp}
+                  </button>
+                )
+            )}
           </div>
         </div>
 

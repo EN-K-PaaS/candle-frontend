@@ -9,5 +9,5 @@ export type NewCommentType = {
   communityId: number;
   userId: string;
   content: string;
-  image: string;
+  // image: string;
 };
