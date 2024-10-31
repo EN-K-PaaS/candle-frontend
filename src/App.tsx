@@ -1,24 +1,45 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import Login from './pages/Login';
+import DailyChecklistContainer from './pages/DailyChecklist/DailyChecklistContainer';
+import MyGoal from './pages/MyGoal/MyGoalContainer';
+import Diary from './pages/Diary/DiaryContainer';
+import EmotionAnalysis from './pages/Emotion_Analysis/EmotionAnalysisContainer';
+import Community from './pages/Community/Community';
+import NavBar from './components/NavBar';
 import SignUp from './pages/SignUp';
-import Diary from './pages/Diary';
-import './App.css';
-import EmotionAnalysis from './pages/Emotion_Analysis';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/diary" element={<Diary />} />
-          <Route path="/emotionanalysis" element={<EmotionAnalysis />} />
-        </Routes>
-      </div>
+      <Content />
     </Router>
+  );
+};
+
+const Content = () => {
+  const location = useLocation();
+
+  return (
+    <div>
+      {location.pathname !== '/' && location.pathname !== '/signup' && (
+        <NavBar />
+      )}
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/dailyChecklist" element={<DailyChecklistContainer />} />
+        <Route path="/myGoal" element={<MyGoal />} />
+        <Route path="/diary" element={<Diary />} />
+        <Route path="/emotionAnalysis" element={<EmotionAnalysis />} />
+        <Route path="/community" element={<Community />} />
+      </Routes>
+    </div>
   );
 };
 

@@ -1,33 +1,50 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { postData } from '../../util/api';
 
 const Login = () => {
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleLogin = async () => {
+    const userInfo = { id: id, password: password };
+
+    try {
+      await postData<typeof userInfo, void>('users/login', userInfo);
+      localStorage.setItem('userId', id); // id 값을 로컬 스토리지에 저장
+      navigate('/dailyChecklist');
+    } catch (error) {
+      console.error('Login failed', error);
+      alert('로그인에 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-156">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="p-8 bg-white rounded-lg shadow-lg w-156">
         <div className="flex items-center justify-start mb-6">
-          <img src="/candle.png" alt="Candle Logo" className="h-8 mr-2" />
+          <img src="/icons/candle-icon.png" className="w-8 mr-2 h-9" />
           <h1 className="text-2xl font-bold">Candle</h1>
         </div>
-        <h2 className="text-2xl font-bold text-center mb-6">반가워요!</h2>
+        <h2 className="mb-6 text-2xl font-bold text-center">반가워요!</h2>
 
         <form>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2 text-left"
+              className="block mb-2 text-sm font-bold text-left text-gray-700"
               htmlFor="email">
               ID
             </label>
             <div className="flex items-center border border-gray-300 rounded-md">
               <span className="px-3 text-gray-400">
                 <svg
-                  className="h-5 w-5"
+                  className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -44,21 +61,23 @@ const Login = () => {
                 id="email"
                 type="text"
                 placeholder="아이디를 입력해주세요"
-                className="w-full py-2 px-4 outline-none text-gray-700"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                className="w-full px-4 py-2 text-gray-700 outline-none"
               />
             </div>
           </div>
 
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2 text-left"
+              className="block mb-2 text-sm font-bold text-left text-gray-700"
               htmlFor="password">
               Password
             </label>
             <div className="flex items-center border border-gray-300 rounded-md">
               <span className="px-3 text-gray-400">
                 <svg
-                  className="h-5 w-5"
+                  className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -75,7 +94,9 @@ const Login = () => {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="비밀번호를 입력해주세요"
-                className="w-full py-2 px-4 outline-none text-gray-700"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 text-gray-700 outline-none"
               />
               <button
                 type="button"
@@ -83,7 +104,7 @@ const Login = () => {
                 onClick={togglePasswordVisibility}>
                 {showPassword ? (
                   <svg
-                    className="h-5 w-5"
+                    className="w-5 h-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -102,7 +123,7 @@ const Login = () => {
                   </svg>
                 ) : (
                   <svg
-                    className="h-5 w-5"
+                    className="w-5 h-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -119,26 +140,17 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between mb-6">
-            <label className="flex items-center text-sm">
-              <input type="checkbox" className="mr-2" />
-              로그인 상태 유지하기
-            </label>
-            <a href="#" className="text-sm text-blue-500 hover:underline">
-              비밀번호를 잊어버리셨나요?
-            </a>
-          </div>
-
           <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+            type="button"
+            onClick={handleLogin}
+            className="w-full py-2 text-white transition duration-300 rounded-md bg-buttonBlue hover:bg-buttonBlue">
             로그인
           </button>
 
-          <div className="text-center mt-6">
+          <div className="mt-6 text-center">
             <p className="text-sm text-gray-500">
               아직 회원이 아니신가요?{' '}
-              <Link to="/signup" className="text-blue-500 hover:underline">
+              <Link to="/signup" className="text-buttonBlue hover:underline">
                 회원가입하기
               </Link>
             </p>
