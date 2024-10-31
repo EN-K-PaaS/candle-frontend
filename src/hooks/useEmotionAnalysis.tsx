@@ -10,7 +10,7 @@ const useEmotionAnalysis = (userId: string) => {
     const getEmotionsLastMonth = async () => {
         setLoading(true);
         try {
-            const fetchedEmotions = await getData<{ positive: number; neutral: number; negative: number }>(`api/v1/emotions/last-month/${userId}`);
+            const fetchedEmotions = await getData<{ positive: number; neutral: number; negative: number }>(`emotions/last-month?userId=${userId}`);
             console.log('Fetched Emotions Last Month:', fetchedEmotions);
             setEmotionsLastMonth(fetchedEmotions);
         } catch (error) {
@@ -23,7 +23,7 @@ const useEmotionAnalysis = (userId: string) => {
     const getEmotionsLastDay = async () => {
         setLoading(true);
         try {
-            const fetchedEmotions = await getData<{ positive: number; neutral: number; negative: number }>(`api/v1/emotions/last_day/${userId}`);
+            const fetchedEmotions = await getData<{ positive: number; neutral: number; negative: number }>(`emotions/last-day?userId=${userId}`);
             console.log('Fetched Emotions Last Day:', fetchedEmotions);
             setEmotionsLastDay(fetchedEmotions);
         } catch (error) {
@@ -36,7 +36,7 @@ const useEmotionAnalysis = (userId: string) => {
     const getDailyTaskRate = async () => {
         setLoading(true);
         try {
-            const fetchedRate = await getData<{ monday: number; tuesday: number; wednesday: number; thursday: number; friday: number; saturday: number; sunday: number }>(`api/v1/daily-tasks/rate/${userId}`);
+            const fetchedRate = await getData<{ monday: number; tuesday: number; wednesday: number; thursday: number; friday: number; saturday: number; sunday: number }>(`daily-tasks/rate?userId=${userId}`);
             console.log('Fetched Daily Task Rate:', fetchedRate);
             setDailyTaskRate(fetchedRate);
         } catch (error) {

@@ -57,12 +57,15 @@ const EmotionAnalysisContainer = () => {
             체크리스트 달성률
           </h2>
           <div className="grid grid-cols-7 gap-2 text-center">
-            {dailyTaskRate && Object.entries(dailyTaskRate).map(([day, completion]) => (
-              <div key={day} className="p-4 bg-white border border-gray-300 rounded-xl">
-                <p className="font-bold">{day}</p>
-                <p className={`${getColorForCompletion(completion)} text-xl font-bold`}>{completion}%</p>
-              </div>
-            ))}
+            {dailyTaskRate && Object.entries(dailyTaskRate).map(([day, completion]) => {
+              const shortDay = day.substring(0, 3).toUpperCase(); 
+              return (
+                <div key={day} className="p-4 bg-white border border-gray-300 rounded-xl">
+                  <p className="font-bold">{shortDay}</p> {/* 변환된 요일 표시 */}
+                  <p className={`${getColorForCompletion(completion)} text-xl font-bold`}>{completion}%</p>
+                </div>
+              );
+            })}
           </div>
         </div>
 
