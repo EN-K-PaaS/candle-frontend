@@ -22,7 +22,7 @@ const useCommentPage = (post: PostItemType, userId: string) => {
       communityId: post?.id!,
       userId: userId,
       content: post?.content || '',
-      // image: post?.imageURL || '',
+      image: '',
     };
 
     await postData<NewCommentType, void>(`community/comments`, newComment);

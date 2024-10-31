@@ -9,6 +9,7 @@ const Community = () => {
     selectedPost,
     inputContent,
     postList,
+    addComment,
     openCommentPage,
     closeCommentPage,
     addPost,
@@ -51,6 +52,7 @@ const Community = () => {
                 <div key={post.id}>
                   <Post
                     post={post}
+                    userId={userId}
                     onShowCommentPage={() => openCommentPage(post)}
                   />
                   {index !== postList.length - 1 && (

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { PostItemType, NewPostType } from '../types/postItemTypes';
 import { getData, postData, checkForSlang } from '../util/api';
+import { NewCommentType } from '../types/commentItemTypes';
 
 interface Comment {
   communityId: number;
@@ -25,6 +26,7 @@ const useCommunity = (userId: string) => {
   const [showCommentPage, setShowCommentPage] = useState(false);
   const [selectedPost, setSelectedPost] = useState<PostItemType | null>(null);
   const [inputContent, setInputContent] = useState<string>('');
+  const [inputComment, setInputComment] = useState<string>('');
 
   const [postList, setPostList] = useState<Array<PostItemType>>([]);
 
@@ -84,11 +86,26 @@ const useCommunity = (userId: string) => {
     await getPostList();
   };
 
+  const addComment = async (post: PostItemType) => {
+    if (inputComment.trim() === '') return;
+
+    const newComment = {
+      communityId: post?.id!,
+      userId: userId,
+      content: post?.content || '',
+      // image: post?.imageURL || '',
+    };
+
+    await postData<NewCommentType, void>(`community/comments`, newComment);
+    setInputComment('');
+  };
+
   return {
     showCommentPage,
     selectedPost,
     inputContent,
     postList,
+    addComment,
     openCommentPage,
     closeCommentPage,
     addPost,
