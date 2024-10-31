@@ -58,7 +58,7 @@ const MyGoalEditor = (props: MyGoalEditorProps) => {
           <div className="">
             <input
               type="date"
-              value={deadline.toISOString().split('T')[0]}
+              value={new Date(deadline).toISOString().split('T')[0]}
               onChange={handleDateChange}
             />
           </div>
